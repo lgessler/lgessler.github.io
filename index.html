@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Luke D. Gessler</title>
-<!-- 2019-09-13 Fri 14:19 -->
+<!-- 2020-08-28 Fri 13:07 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -199,40 +199,8 @@ $(function() {
 <img src="img/luke.jpeg" style="float:right;border-radius:50%;width:240px;height:240px;">
 
 <p>
-I am a second-year Ph.D. student in computational linguistics at <a href="https://linguistics.georgetown.edu">Georgetown University</a>, where I am a member of <a href="http://corpling.uis.georgetown.edu/corpling/">Corpling@GU</a> and <a href="http://gucl.georgetown.edu/">GUCL</a>. Previously, I was a software engineer at <a href="https://en.wikipedia.org/wiki/Epic_Systems">Epic</a>, and before that, I completed a B.A. in linguistics and computer science at the <a href="https://en.wikipedia.org/wiki/University_of_Virginia">University of Virginia</a>. I am interested in computational linguistics, specifically in the context of endangered language documentation and development and linguistic annotation.
+I am a third-year Ph.D. student in computational linguistics at <a href="https://linguistics.georgetown.edu">Georgetown University</a>. I am interested in linguistic annotation and low-resource NLP, particularly in the context of endangered language documentation. Here's <a href="./cv.pdf">my CV</a>. I am also an <a href="https://en.wikipedia.org/wiki/Org-mode">org-mode</a> and <a href="https://en.wikipedia.org/wiki/Lisp_(programming_language)">Lisp</a> (<a href="https://en.wikipedia.org/wiki/Clojure">Clojure</a>, in particular) fanatic.
 </p>
-
-<p>
-<a href="./cv.pdf">My CV</a>
-</p>
-
-<div id="outline-container-sec-" class="outline-2">
-<h2 id="sec-">Research</h2>
-<div class="outline-text-2" id="text-">
-<p>
-<a href="https://news.un.org/en/story/2002/02/28072-3000-languages-world-face-extinction-unesco-warns">Roughly half of the world's languages are facing extinction</a>. Many of their speakers want them to be documented, but there is much more demand for documentation than there is labor to fulfill it. How can we fill this labor gap?
-</p>
-
-<p>
-I think computer software is a critical part of the solution. Traditional documentation methods can benefit from software facilitating or fully automating its most time-consuming and repetitious tasks, like glossing and data management. Software may also enable new documentation methods that allow people who aren't highly trained linguists (often the "limiting reagents" in the documentation process) to contribute more than they ever could before.
-</p>
-
-<p>
-So, what could this computational assistance look like? Some examples, from more to less obvious, include:
-</p>
-
-<ul class="org-ul">
-<li>a comprehensive software suite for field linguists that is, in a word, good enough to convince documenters it's worth the trouble
-</li>
-<li>quality of life features for the programs that linguists already use, e.g. a plugin for an annotation application that can correctly parse a word 90% of the time, saving the documenter much manual labor
-</li>
-<li>an app for speakers of the target language who are <i>not</i> linguistically trained that somehow allows them to contribute useful documentary labor
-</li>
-<li>an app that can deduce information about the target language through interactions its (native speaker) users have in an activity where the overt purpose is <i>not</i> to document the language, similar to the <a href="https://en.wikipedia.org/wiki/ESP_game">ESP game</a>
-</li>
-</ul>
-</div>
-</div>
 
 <div id="outline-container-sec-" class="outline-2">
 <h2 id="sec-">Recent work</h2>
@@ -296,6 +264,80 @@ So, what could this computational assistance look like? Some examples, from more
 </div>
 <div id="bibtex_display"></div>
 <textarea id="bibtex_input" style="display:none;">
+@inproceedings{gessler-etal-2020-amalgum,
+    title = "{AMALGUM} {--} A Free, Balanced, Multilayer {E}nglish Web Corpus",
+    author = "Gessler, Luke  and
+      Peng, Siyao  and
+      Liu, Yang  and
+      Zhu, Yilun  and
+      Behzad, Shabnam  and
+      Zeldes, Amir",
+    booktitle = "Proceedings of The 12th Language Resources and Evaluation Conference",
+    month = may,
+    year = "2020",
+    address = "Marseille, France",
+    publisher = "European Language Resources Association",
+    url = "https://www.aclweb.org/anthology/2020.lrec-1.648",
+    pages = "5267--5275",
+    abstract = "We present a freely available, genre-balanced English web corpus totaling 4M tokens and featuring a large number of high-quality automatic annotation layers, including dependency trees, non-named entity annotations, coreference resolution, and discourse trees in Rhetorical Structure Theory. By tapping open online data sources the corpus is meant to offer a more sizable alternative to smaller manually created annotated data sets, while avoiding pitfalls such as imbalanced or unknown composition, licensing problems, and low-quality natural language processing. We harness knowledge from multiple annotation layers in order to achieve a {``}better than NLP{''} benchmark and evaluate the accuracy of the resulting resource.",
+    language = "English",
+    ISBN = "979-10-95546-34-4",
+}
+
+@inproceedings{arora-etal-2020-supervised,
+    title = "Supervised Grapheme-to-Phoneme Conversion of Orthographic Schwas in {H}indi and {P}unjabi",
+    author = "Arora, Aryaman  and
+      Gessler, Luke  and
+      Schneider, Nathan",
+    booktitle = "Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics",
+    month = jul,
+    year = "2020",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/2020.acl-main.696",
+    doi = "10.18653/v1/2020.acl-main.696",
+    pages = "7791--7795",
+    abstract = "Hindi grapheme-to-phoneme (G2P) conversion is mostly trivial, with one exception: whether a schwa represented in the orthography is pronounced or unpronounced (deleted). Previous work has attempted to predict schwa deletion in a rule-based fashion using prosodic or phonetic analysis. We present the first statistical schwa deletion classifier for Hindi, which relies solely on the orthography as the input and outperforms previous approaches. We trained our model on a newly-compiled pronunciation lexicon extracted from various online dictionaries. Our best Hindi model achieves state of the art performance, and also achieves good performance on a closely related language, Punjabi, without modification.",
+}
+
+@inproceedings{neubig-etal-2020-summary,
+    title = "A Summary of the First Workshop on Language Technology for Language Documentation and Revitalization",
+    author = "Neubig, Graham  and
+      Rijhwani, Shruti  and
+      Palmer, Alexis  and
+      MacKenzie, Jordan  and
+      Cruz, Hilaria  and
+      Li, Xinjian  and
+      Lee, Matthew  and
+      Chaudhary, Aditi  and
+      Gessler, Luke  and
+      Abney, Steven  and
+      Hayati, Shirley Anugrah  and
+      Anastasopoulos, Antonios  and
+      Zamaraeva, Olga  and
+      Prud'hommeaux, Emily  and
+      Child, Jennette  and
+      Child, Sara  and
+      Knowles, Rebecca  and
+      Moeller, Sarah  and
+      Micher, Jeffrey  and
+      Li, Yiyuan  and
+      Zink, Sydney  and
+      Xia, Mengzhou  and
+      Sharma, Roshan S  and
+      Littell, Patrick",
+    booktitle = "Proceedings of the 1st Joint Workshop on Spoken Language Technologies for Under-resourced languages (SLTU) and Collaboration and Computing for Under-Resourced Languages (CCURL)",
+    month = may,
+    year = "2020",
+    address = "Marseille, France",
+    publisher = "European Language Resources association",
+    url = "https://www.aclweb.org/anthology/2020.sltu-1.48",
+    pages = "342--351",
+    abstract = "Despite recent advances in natural language processing and other language technology, the application of such technology to language documentation and conservation has been limited. In August 2019, a workshop was held at Carnegie Mellon University in Pittsburgh, PA, USA to attempt to bring together language community members, documentary linguists, and technologists to discuss how to bridge this gap and create prototypes of novel and practical language revitalization technologies. The workshop focused on developing technologies to aid language documentation and revitalization in four areas: 1) spoken language (speech transcription, phone to orthography decoding, text-to-speech and text-speech forced alignment), 2) dictionary extraction and management, 3) search tools for corpora, and 4) social media (language learning bots and social media analysis). This paper reports the results of this workshop, including issues discussed, and various conceived and implemented technologies for nine languages: Arapaho, Cayuga, Inuktitut, Irish Gaelic, Kidaw{'}ida, Kwak{'}wala, Ojibwe, San Juan Quiahije Chatino, and Seneca.",
+    language = "English",
+    ISBN = "979-10-95546-35-1",
+}
+
 @InProceedings{AbrahsGesslerMarge2019Brex,
     title = "B. Rex: A Dialogue Agent for Book Recommendations",
 	author = {Mitchell Abrams and Luke Gessler and Matthew Marge},
