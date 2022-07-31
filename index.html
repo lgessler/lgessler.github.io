@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Luke D. Gessler</title>
-<!-- 2022-04-05 Tue 18:27 -->
+<!-- 2022-07-31 Sun 19:38 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -199,11 +199,9 @@ $(function() {
 <img src="img/luke.jpeg" style="float:right;border-radius:50%;width:240px;height:240px;">
 
 <p>
-<b>News (2022-04-05)</b>: I've had two papers accepted: one at <a href="https://lrec2022.lrec-conf.org/en/">LREC</a>, and another at <a href="https://computel-workshop.org/computel-5/?utm_source=sendpulse&amp;utm_medium=email&amp;utm_campaign=biea-buletin-events-and-h">ComputEL-5</a>! Copies coming soon.
-</p>
-
-<p>
-I am a fourth-year Ph.D. student in computational linguistics at <a href="https://linguistics.georgetown.edu">Georgetown University</a>. I am interested in linguistic annotation and low-resource NLP, particularly in the context of endangered language documentation. I am also an <a href="https://en.wikipedia.org/wiki/Org-mode">org-mode</a> and <a href="https://en.wikipedia.org/wiki/Lisp_(programming_language)">Lisp</a> (<a href="https://en.wikipedia.org/wiki/Clojure">Clojure</a>, in particular) fanatic.
+I am a fifth-year Ph.D. student in computational linguistics at <a href="https://linguistics.georgetown.edu">Georgetown University</a>.
+I am interested in low-resource NLP, particularly in the context of endangered language documentation.
+I maintain the <a href="./mala/">Map of Applications for Linguistic Annotation</a>, and I am super into <a href="https://en.wikipedia.org/wiki/Org-mode">org-mode</a> and <a href="https://en.wikipedia.org/wiki/Lisp_(programming_language)">Lisp</a> (<a href="https://en.wikipedia.org/wiki/Clojure">Clojure</a>, in particular).
 </p>
 
 <p>
@@ -288,6 +286,46 @@ Here is my&#x2026;
 </div>
 <div id="bibtex_display"></div>
 <textarea id="bibtex_input" style="display:none;">
+@inproceedings{gessler-2022-closing,
+    title = "Closing the {NLP} Gap: Documentary Linguistics and {NLP} Need a Shared Software Infrastructure",
+    author = "Gessler, Luke",
+    booktitle = "Proceedings of the Fifth Workshop on the Use of Computational Methods in the Study of Endangered Languages",
+    month = may,
+    year = "2022",
+    address = "Dublin, Ireland",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2022.computel-1.15",
+    doi = "10.18653/v1/2022.computel-1.15",
+    pages = "119--126",
+    abstract = "For decades, researchers in natural language processing and computational linguistics have been developing models and algorithms that aim to serve the needs of language documentation projects. However, these models have seen little use in language documentation despite their great potential for making documentary linguistic artefacts better and easier to produce. In this work, we argue that a major reason for this NLP gap is the lack of a strong foundation of application software which can on the one hand serve the complex needs of language documentation and on the other hand provide effortless integration with NLP models. We further present and describe a work-in-progress system we have developed to serve this need, Glam.",
+}
+
+@inproceedings{gessler_midas_2022,
+	address = {Marseille, France},
+	title = {Midas {Loop}: {A} {Prioritized} {Human}-in-the-{Loop} {Annotation} for {Large} {Scale} {Multilayer} {Data}},
+	url = {https://aclanthology.org/2022.lawxvi-1.13},
+	abstract = {Large scale annotation of rich multilayer corpus data is expensive and time consuming, motivating approaches that integrate high quality automatic tools with active learning in order to prioritize human labeling of hard cases. A related challenge in such scenarios is the concurrent management of automatically annotated data and human annotated data, particularly where different subsets of the data have been corrected for different types of annotation and with different levels of confidence. In this paper we present [REDACTED], a collaborative, version-controlled online annotation environment for multilayer corpus data which includes integrated provenance and confidence metadata for each piece of information at the document, sentence, token and annotation level. We present a case study on improving annotation quality in an existing multilayer parse bank of English called AMALGUM, focusing on active learning in corpus preprocessing, at the surprisingly challenging level of sentence segmentation. Our results show improvements to state-of-the-art sentence segmentation and a promising workflow for getting "silver" data to approach gold standard quality.},
+	booktitle = {Proceedings of {The} 16th {Lingusitic} {Annotation} {Workshop} ({LAW}-{XVI}) within {LREC2022}},
+	publisher = {European Language Resources Association},
+	author = {Gessler, Luke and Levine, Lauren and Zeldes, Amir},
+	month = jun,
+	year = {2022},
+	pages = {103--110},
+}
+
+@inproceedings{gessler_xposition_2022,
+	address = {Marseille, France},
+	title = {Xposition: {An} {Online} {Multilingual} {Database} of {Adpositional} {Semantics}},
+	url = {https://aclanthology.org/2022.lrec-1.194},
+	abstract = {We present Xposition, an online platform for documenting adpositional semantics across languages in terms of supersenses (Schneider et al., 2018). More than just a lexical database, Xposition houses annotation guidelines, structured lexicographic documentation, and annotated corpora. Guidelines and documentation are stored as wiki pages for ease of editing, and described elements (supersenses, adpositions, etc.) are hyperlinked for ease of browsing. We describe how the platform structures information; its current contents across several languages; and aspects of the design of the web application that supports it, with special attention to how it supports datasets and standards that evolve over time.},
+	booktitle = {Proceedings of the {Language} {Resources} and {Evaluation} {Conference}},
+	publisher = {European Language Resources Association},
+	author = {Gessler, Luke and Schneider, Nathan and Ledford, Joseph C. and Blodgett, Austin},
+	month = jun,
+	year = {2022},
+	pages = {1824--1830},
+}
+
 @inproceedings{uncommon-sense,
     title = "{BERT} has uncommon sense: similarity ranking for word sense {BERTology}",
     author = "Gessler, Luke  and
