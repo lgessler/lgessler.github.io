@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Luke D. Gessler</title>
-<!-- 2022-11-10 Thu 11:18 -->
+<!-- 2023-02-08 Wed 02:26 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -318,6 +318,20 @@ Here is my&#x2026;
 </div>
 <div id="bibtex_display"></div>
 <textarea id="bibtex_input" style="display:none;">
+@inproceedings{gessler-zeldes-2022-microbert,
+    title = "{M}icro{BERT}: Effective Training of Low-resource Monolingual {BERT}s through Parameter Reduction and Multitask Learning",
+    author = "Gessler, Luke  and
+      Zeldes, Amir",
+    booktitle = "Proceedings of the The 2nd Workshop on Multi-lingual Representation Learning (MRL)",
+    month = dec,
+    year = "2022",
+    address = "Abu Dhabi, United Arab Emirates (Hybrid)",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2022.mrl-1.9",
+    pages = "86--99",
+    abstract = "BERT-style contextualized word embedding models are critical for good performance in most NLP tasks, but they are data-hungry and therefore difficult to train for low-resource languages. In this work, we investigate whether a combination of greatly reduced model size and two linguistically rich auxiliary pretraining tasks (part-of-speech tagging and dependency parsing) can help produce better BERTs in a low-resource setting. Results from 7 diverse languages indicate that our model, MicroBERT, is able to produce marked improvements in downstream task evaluations, including gains up to 18{\%} for parser LAS and 11{\%} for NER F1 compared to an mBERT baseline, and we achieve these results with less than 1{\%} of the parameter count of a multilingual BERT base{--}sized model. We conclude that training very small BERTs and leveraging any available labeled data for multitask learning during pretraining can produce models which outperform both their multilingual counterparts and traditional fixed embeddings for low-resource languages.",
+}
+
 @inproceedings{gessler-2022-closing,
     title = "Closing the {NLP} Gap: Documentary Linguistics and {NLP} Need a Shared Software Infrastructure",
     author = "Gessler, Luke",
