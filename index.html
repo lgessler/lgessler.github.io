@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>Luke D. Gessler</title>
-<!-- 2024-04-11 Thu 17:03 -->
+<!-- 2024-08-26 Mon 18:36 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Org-mode">
@@ -200,8 +200,8 @@ $(function() {
 
 <p>
 Hi, I'm Luke!
-Starting in August 2024, I will join <a href="https://linguistics.indiana.edu/index.html">Indiana University's Department of Linguistics</a> as an assistant professor.
-Currently, I am a postdoc in the <a href="https://nala-cub.github.io/">NALA Group</a> with <a href="https://kelina.github.io/">Katharina von der Wense</a> at CU Boulder, where I went after I got my Ph.D. in computational linguistics at <a href="https://linguistics.georgetown.edu">Georgetown University</a>.
+I'm an assistant professor at <a href="https://linguistics.indiana.edu/index.html">Indiana University's Department of Linguistics</a>.
+Previously, I was a postdoc in the <a href="https://nala-cub.github.io/">NALA Group</a> at CU Boulder, and I got my Ph.D. in computational linguistics at <a href="https://linguistics.georgetown.edu">Georgetown University</a> with the <a href="https://gucorpling.org/corpling/">Corpling lab</a> and <a href="https://nert.georgetown.edu/">NERT</a>.
 </p>
 
 <p>
@@ -325,6 +325,109 @@ Also, I maintain the <a href="./mala/">Map of Applications for Linguistic Annota
 </div>
 <div id="bibtex_display"></div>
 <textarea id="bibtex_input" style="display:none;">
+@inproceedings{gessler-2024-pronto,
+    title = "{P}r{O}nto: Language Model Evaluations for 859 Languages",
+    author = "Gessler, Luke",
+    editor = "Calzolari, Nicoletta  and
+      Kan, Min-Yen  and
+      Hoste, Veronique  and
+      Lenci, Alessandro  and
+      Sakti, Sakriani  and
+      Xue, Nianwen",
+    booktitle = "Proceedings of the 2024 Joint International Conference on Computational Linguistics, Language Resources and Evaluation (LREC-COLING 2024)",
+    month = may,
+    year = "2024",
+    address = "Torino, Italia",
+    publisher = "ELRA and ICCL",
+    url = "https://aclanthology.org/2024.lrec-main.1159",
+    pages = "13243--13256",
+    abstract = "Evaluation datasets are critical resources for measuring the quality of pretrained language models. However, due to the high cost of dataset annotation, these resources are scarce for most languages other than English, making it difficult to assess the quality of language models. In this work, we present a new method for evaluation dataset construction which enables any language with a New Testament translation to receive a suite of evaluation datasets suitable for pretrained language model evaluation. The method critically involves aligning verses with those in the New Testament portion of English OntoNotes, and then projecting annotations from English to the target language, with no manual annotation required. We apply this method to 1051 New Testament translations in 859 languages and make them publicly available. Additionally, we conduct experiments which demonstrate the efficacy of our method for creating evaluation tasks which can assess language model quality.",
+}
+
+@inproceedings{gessler-von-der-wense-2024-nlp,
+    title = "{NLP} for Language Documentation: Two Reasons for the Gap between Theory and Practice",
+    author = "Gessler, Luke  and
+      von der Wense, Katharina",
+    editor = "Mager, Manuel  and
+      Ebrahimi, Abteen  and
+      Rijhwani, Shruti  and
+      Oncevay, Arturo  and
+      Chiruzzo, Luis  and
+      Pugh, Robert  and
+      von der Wense, Katharina",
+    booktitle = "Proceedings of the 4th Workshop on Natural Language Processing for Indigenous Languages of the Americas (AmericasNLP 2024)",
+    month = jun,
+    year = "2024",
+    address = "Mexico City, Mexico",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2024.americasnlp-1.1",
+    doi = "10.18653/v1/2024.americasnlp-1.1",
+    pages = "1--6",
+    abstract = "Both NLP researchers and linguists have expressed a desire to use language technologies in language documentation, but most documentary work still proceeds without them, presenting a lost opportunity to hasten the preservation of the world{'}s endangered languages, such as those spoken in Latin America. In this work, we empirically measure two factors that have previously been identified as explanations of this low utilization: curricular offerings in graduate programs, and rates of interdisciplinary collaboration in publications related to NLP in language documentation. Our findings verify the claim that interdisciplinary training and collaborations are scarce and support the view that interdisciplinary curricular offerings facilitate interdisciplinary collaborations.",
+}
+
+@inproceedings{rice-etal-2024-tams,
+    title = "{TAMS}: Translation-Assisted Morphological Segmentation",
+    author = "Rice, Enora  and
+      Marashian, Ali  and
+      Gessler, Luke  and
+      Palmer, Alexis  and
+      Wense, Katharina",
+    editor = "Ku, Lun-Wei  and
+      Martins, Andre  and
+      Srikumar, Vivek",
+    booktitle = "Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)",
+    month = aug,
+    year = "2024",
+    address = "Bangkok, Thailand",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2024.acl-long.366",
+    pages = "6752--6765",
+    abstract = "Canonical morphological segmentation is the process of analyzing words into the standard (\textit{aka} underlying) forms of their constituent morphemes.This is a core task in endangered language documentation, and NLP systems have the potential to dramatically speed up this process. In typical language documentation settings, training data for canonical morpheme segmentation is scarce, making it difficult to train high quality models. However, translation data is often much more abundant, and, in this work, we present a method that attempts to leverage translation data in the canonical segmentation task. We propose a character-level sequence-to-sequence model that incorporates representations of translations obtained from pretrained high-resource monolingual language models as an additional signal. Our model outperforms the baseline in a super-low resource setting but yields mixed results on training splits with more data. Additionally, we find that we can achieve strong performance even without needing difficult-to-obtain word level alignments. While further work is needed to make translations useful in higher-resource settings, our model shows promise in severely resource-constrained settings.",
+}
+
+@inproceedings{gessler-schneider-2023-syntactic,
+    title = "Syntactic Inductive Bias in Transformer Language Models: Especially Helpful for Low-Resource Languages?",
+    author = "Gessler, Luke  and
+      Schneider, Nathan",
+    editor = "Jiang, Jing  and
+      Reitter, David  and
+      Deng, Shumin",
+    booktitle = "Proceedings of the 27th Conference on Computational Natural Language Learning (CoNLL)",
+    month = dec,
+    year = "2023",
+    address = "Singapore",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2023.conll-1.17",
+    doi = "10.18653/v1/2023.conll-1.17",
+    pages = "238--253",
+    abstract = "A line of work on Transformer-based language models such as BERT has attempted to use syntactic inductive bias to enhance the pretraining process, on the theory that building syntactic structure into the training process should reduce the amount of data needed for training. But such methods are often tested for high-resource languages such as English. In this work, we investigate whether these methods can compensate for data sparseness in low-resource languages, hypothesizing that they ought to be more effective for low-resource languages. We experiment with five low-resource languages: Uyghur, Wolof, Maltese, Coptic, and Ancient Greek. We find that these syntactic inductive bias methods produce uneven results in low-resource settings, and provide surprisingly little benefit in most cases.",
+}
+
+@inproceedings{aoyama-etal-2023-gentle,
+    title = "{GENTLE}: A Genre-Diverse Multilayer Challenge Set for {E}nglish {NLP} and Linguistic Evaluation",
+    author = "Aoyama, Tatsuya  and
+      Behzad, Shabnam  and
+      Gessler, Luke  and
+      Levine, Lauren  and
+      Lin, Jessica  and
+      Liu, Yang Janet  and
+      Peng, Siyao  and
+      Zhu, Yilun  and
+      Zeldes, Amir",
+    editor = "Prange, Jakob  and
+      Friedrich, Annemarie",
+    booktitle = "Proceedings of the 17th Linguistic Annotation Workshop (LAW-XVII)",
+    month = jul,
+    year = "2023",
+    address = "Toronto, Canada",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2023.law-1.17",
+    doi = "10.18653/v1/2023.law-1.17",
+    pages = "166--178",
+    abstract = "We present GENTLE, a new mixed-genre English challenge corpus totaling 17K tokens and consisting of 8 unusual text types for out-of-domain evaluation: dictionary entries, esports commentaries, legal documents, medical notes, poetry, mathematical proofs, syllabuses, and threat letters. GENTLE is manually annotated for a variety of popular NLP tasks, including syntactic dependency parsing, entity recognition, coreference resolution, and discourse parsing. We evaluate state-of-the-art NLP systems on GENTLE and find severe degradation for at least some genres in their performance on all tasks, which indicates GENTLE{'}s utility as an evaluation dataset for NLP systems.",
+}
+
 @inproceedings{gessler-zeldes-2022-microbert,
     title = "{M}icro{BERT}: Effective Training of Low-resource Monolingual {BERT}s through Parameter Reduction and Multitask Learning",
     author = "Gessler, Luke  and
