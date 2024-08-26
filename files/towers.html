@@ -41,6 +41,14 @@
             left: 50%;
             transform: translateX(-50%);
         }
+        .held-disk {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 20px;
+            border-radius: 10px;
+            top: 40px; /* Position right below the arm */
+        }
         #controls {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -55,6 +63,11 @@
         }
         #log {
             margin-top: 20px;
+        }
+        #key-controls {
+            text-align: center;
+            margin-top: 20px;
+            font-style: italic;
         }
     </style>
 </head>
@@ -76,6 +89,9 @@
         <div></div>
         <button onclick="putDown()">↓ Put Down</button>
         <div></div>
+    </div>
+    <div id="key-controls">
+        Use arrow keys to move and pick up/put down. Press Space to reset.
     </div>
     <div id="log">
         <h2 id="logTitle">Action Log (0):</h2>
@@ -107,12 +123,15 @@
         }
 
         function moveArm(direction) {
-            armPosition = direction === 'left'
+            const newPosition = direction === 'left'
                 ? Math.max(0, armPosition - 1)
                 : Math.min(2, armPosition + 1);
-            log.push(`Move ${direction}`);
-            updateUI();
-            updateLog();
+            if (newPosition !== armPosition) {
+                armPosition = newPosition;
+                log.push(`Move ${direction}`);
+                updateUI();
+                updateLog();
+            }
         }
 
         function pickUp() {
@@ -161,15 +180,15 @@
                 if (armPosition === index) {
                     const armElement = document.createElement('div');
                     armElement.id = 'arm';
+                    towerElement.appendChild(armElement);
+                    
                     if (heldDisk !== null) {
                         const heldDiskElement = document.createElement('div');
-                        heldDiskElement.className = 'disk';
+                        heldDiskElement.className = 'held-disk';
                         heldDiskElement.style.width = `${(heldDisk / numDisks) * 100}%`;
                         heldDiskElement.style.backgroundColor = getDiskColor(heldDisk);
-                        heldDiskElement.style.bottom = '0';
-                        armElement.appendChild(heldDiskElement);
+                        towerElement.appendChild(heldDiskElement);
                     }
-                    towerElement.appendChild(armElement);
                 }
 
                 towersElement.appendChild(towerElement);
@@ -188,7 +207,34 @@
             resetPuzzle();
         });
 
+        // Add keyboard controls
+        document.addEventListener('keydown', function(event) {
+            switch(event.key) {
+                case 'ArrowLeft':
+                    event.preventDefault();
+                    moveArm('left');
+                    break;
+                case 'ArrowRight':
+                    event.preventDefault();
+                    moveArm('right');
+                    break;
+                case 'ArrowUp':
+                    event.preventDefault();
+                    pickUp();
+                    break;
+                case 'ArrowDown':
+                    event.preventDefault();
+                    putDown();
+                    break;
+                case ' ':
+                    event.preventDefault();
+                    resetPuzzle();
+                    break;
+            }
+        });
+
         resetPuzzle();
     </script>
 </body>
 </html>
+
