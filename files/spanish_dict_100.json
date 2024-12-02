@@ -1,0 +1,438 @@
+[
+  {
+    "form": "casa",
+    "meaning": "house"
+  },
+  {
+    "form": "perro",
+    "meaning": "dog"
+  },
+  {
+    "form": "comer",
+    "meaning": "to eat"
+  },
+  {
+    "form": "feliz",
+    "meaning": "happy"
+  },
+  {
+    "form": "libro",
+    "meaning": "book"
+  },
+  {
+    "form": "rojo",
+    "meaning": "red"
+  },
+  {
+    "form": "agua",
+    "meaning": "water"
+  },
+  {
+    "form": "sol",
+    "meaning": "sun"
+  },
+  {
+    "form": "amigo",
+    "meaning": "friend"
+  },
+  {
+    "form": "trabajar",
+    "meaning": "to work"
+  },
+  {
+    "form": "verde",
+    "meaning": "green"
+  },
+  {
+    "form": "azul",
+    "meaning": "blue"
+  },
+  {
+    "form": "gato",
+    "meaning": "cat"
+  },
+  {
+    "form": "mesa",
+    "meaning": "table"
+  },
+  {
+    "form": "silla",
+    "meaning": "chair"
+  },
+  {
+    "form": "tiempo",
+    "meaning": "time"
+  },
+  {
+    "form": "día",
+    "meaning": "day"
+  },
+  {
+    "form": "noche",
+    "meaning": "night"
+  },
+  {
+    "form": "año",
+    "meaning": "year"
+  },
+  {
+    "form": "mes",
+    "meaning": "month"
+  },
+  {
+    "form": "semana",
+    "meaning": "week"
+  },
+  {
+    "form": "hora",
+    "meaning": "hour"
+  },
+  {
+    "form": "minuto",
+    "meaning": "minute"
+  },
+  {
+    "form": "segundo",
+    "meaning": "second"
+  },
+  {
+    "form": "padre",
+    "meaning": "father"
+  },
+  {
+    "form": "madre",
+    "meaning": "mother"
+  },
+  {
+    "form": "hermano",
+    "meaning": "brother"
+  },
+  {
+    "form": "hermana",
+    "meaning": "sister"
+  },
+  {
+    "form": "familia",
+    "meaning": "family"
+  },
+  {
+    "form": "hijo",
+    "meaning": "son"
+  },
+  {
+    "form": "hija",
+    "meaning": "daughter"
+  },
+  {
+    "form": "abuelo",
+    "meaning": "grandfather"
+  },
+  {
+    "form": "abuela",
+    "meaning": "grandmother"
+  },
+  {
+    "form": "tío",
+    "meaning": "uncle"
+  },
+  {
+    "form": "tía",
+    "meaning": "aunt"
+  },
+  {
+    "form": "primo",
+    "meaning": "cousin"
+  },
+  {
+    "form": "dormir",
+    "meaning": "to sleep"
+  },
+  {
+    "form": "hablar",
+    "meaning": "to speak"
+  },
+  {
+    "form": "escribir",
+    "meaning": "to write"
+  },
+  {
+    "form": "leer",
+    "meaning": "to read"
+  },
+  {
+    "form": "ver",
+    "meaning": "to see"
+  },
+  {
+    "form": "oír",
+    "meaning": "to hear"
+  },
+  {
+    "form": "sentir",
+    "meaning": "to feel"
+  },
+  {
+    "form": "pensar",
+    "meaning": "to think"
+  },
+  {
+    "form": "saber",
+    "meaning": "to know"
+  },
+  {
+    "form": "querer",
+    "meaning": "to want"
+  },
+  {
+    "form": "poder",
+    "meaning": "to be able"
+  },
+  {
+    "form": "ir",
+    "meaning": "to go"
+  },
+  {
+    "form": "venir",
+    "meaning": "to come"
+  },
+  {
+    "form": "hacer",
+    "meaning": "to do"
+  },
+  {
+    "form": "grande",
+    "meaning": "big"
+  },
+  {
+    "form": "pequeño",
+    "meaning": "small"
+  },
+  {
+    "form": "alto",
+    "meaning": "tall"
+  },
+  {
+    "form": "bajo",
+    "meaning": "short"
+  },
+  {
+    "form": "bueno",
+    "meaning": "good"
+  },
+  {
+    "form": "malo",
+    "meaning": "bad"
+  },
+  {
+    "form": "nuevo",
+    "meaning": "new"
+  },
+  {
+    "form": "viejo",
+    "meaning": "old"
+  },
+  {
+    "form": "joven",
+    "meaning": "young"
+  },
+  {
+    "form": "caliente",
+    "meaning": "hot"
+  },
+  {
+    "form": "frío",
+    "meaning": "cold"
+  },
+  {
+    "form": "limpio",
+    "meaning": "clean"
+  },
+  {
+    "form": "sucio",
+    "meaning": "dirty"
+  },
+  {
+    "form": "fácil",
+    "meaning": "easy"
+  },
+  {
+    "form": "difícil",
+    "meaning": "difficult"
+  },
+  {
+    "form": "rápido",
+    "meaning": "fast"
+  },
+  {
+    "form": "lento",
+    "meaning": "slow"
+  },
+  {
+    "form": "fuerte",
+    "meaning": "strong"
+  },
+  {
+    "form": "débil",
+    "meaning": "weak"
+  },
+  {
+    "form": "pan",
+    "meaning": "bread"
+  },
+  {
+    "form": "leche",
+    "meaning": "milk"
+  },
+  {
+    "form": "carne",
+    "meaning": "meat"
+  },
+  {
+    "form": "pescado",
+    "meaning": "fish"
+  },
+  {
+    "form": "huevo",
+    "meaning": "egg"
+  },
+  {
+    "form": "fruta",
+    "meaning": "fruit"
+  },
+  {
+    "form": "verdura",
+    "meaning": "vegetable"
+  },
+  {
+    "form": "arroz",
+    "meaning": "rice"
+  },
+  {
+    "form": "sal",
+    "meaning": "salt"
+  },
+  {
+    "form": "azúcar",
+    "meaning": "sugar"
+  },
+  {
+    "form": "cabeza",
+    "meaning": "head"
+  },
+  {
+    "form": "cara",
+    "meaning": "face"
+  },
+  {
+    "form": "ojo",
+    "meaning": "eye"
+  },
+  {
+    "form": "nariz",
+    "meaning": "nose"
+  },
+  {
+    "form": "boca",
+    "meaning": "mouth"
+  },
+  {
+    "form": "oreja",
+    "meaning": "ear"
+  },
+  {
+    "form": "mano",
+    "meaning": "hand"
+  },
+  {
+    "form": "pie",
+    "meaning": "foot"
+  },
+  {
+    "form": "brazo",
+    "meaning": "arm"
+  },
+  {
+    "form": "pierna",
+    "meaning": "leg"
+  },
+  {
+    "form": "corazón",
+    "meaning": "heart"
+  },
+  {
+    "form": "ciudad",
+    "meaning": "city"
+  },
+  {
+    "form": "calle",
+    "meaning": "street"
+  },
+  {
+    "form": "edificio",
+    "meaning": "building"
+  },
+  {
+    "form": "escuela",
+    "meaning": "school"
+  },
+  {
+    "form": "hospital",
+    "meaning": "hospital"
+  },
+  {
+    "form": "tienda",
+    "meaning": "store"
+  },
+  {
+    "form": "restaurante",
+    "meaning": "restaurant"
+  },
+  {
+    "form": "parque",
+    "meaning": "park"
+  },
+  {
+    "form": "playa",
+    "meaning": "beach"
+  },
+  {
+    "form": "montaña",
+    "meaning": "mountain"
+  },
+  {
+    "form": "río",
+    "meaning": "river"
+  },
+  {
+    "form": "mar",
+    "meaning": "sea"
+  },
+  {
+    "form": "cielo",
+    "meaning": "sky"
+  },
+  {
+    "form": "tierra",
+    "meaning": "earth"
+  },
+  {
+    "form": "aire",
+    "meaning": "air"
+  },
+  {
+    "form": "fuego",
+    "meaning": "fire"
+  },
+  {
+    "form": "lluvia",
+    "meaning": "rain"
+  },
+  {
+    "form": "nieve",
+    "meaning": "snow"
+  },
+  {
+    "form": "viento",
+    "meaning": "wind"
+  }
+]
