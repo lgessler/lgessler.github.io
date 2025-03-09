@@ -132,64 +132,60 @@ class BibliographyAsciiDocReader:
     
     def _process_with_bibtex(self, bib_path):
         """Process bibliography with the bundled ACL BST file."""
-        try:
-            # Create a temporary directory for our work
-            with tempfile.TemporaryDirectory() as temp_dir:
-                # Define temp file paths
-                temp_dir_path = Path(temp_dir)
-                tex_path = temp_dir_path / "temp.tex"
-                aux_path = temp_dir_path / "temp.aux"
-                bbl_path = temp_dir_path / "temp.bbl"
-                temp_bib_path = temp_dir_path / "temp.bib"
-                temp_bst_path = temp_dir_path / "temp.bst"
-                
-                # Copy the bib file
-                with open(bib_path, 'r', encoding='utf-8') as src, \
-                     open(temp_bib_path, 'w', encoding='utf-8') as dst:
-                    dst.write(src.read())
-                
-                # Copy the bundled BST file
-                with open(self.bst_path, 'r', encoding='utf-8') as src, \
-                     open(temp_bst_path, 'w', encoding='utf-8') as dst:
-                    dst.write(src.read())
-                
-                # Create the LaTeX document
-                with open(tex_path, 'w', encoding='utf-8') as f:
-                    f.write(r'''\documentclass{article}
+        # Create a temporary directory for our work
+        with tempfile.TemporaryDirectory() as temp_dir:
+            # Define temp file paths
+            temp_dir_path = Path(temp_dir)
+            tex_path = temp_dir_path / "temp.tex"
+            aux_path = temp_dir_path / "temp.aux"
+            bbl_path = temp_dir_path / "temp.bbl"
+            temp_bib_path = temp_dir_path / "temp.bib"
+            temp_bst_path = temp_dir_path / "temp.bst"
+            
+            # Copy the bib file
+            with open(bib_path, 'r', encoding='utf-8') as src, \
+                    open(temp_bib_path, 'w', encoding='utf-8') as dst:
+                dst.write(src.read())
+            
+            # Copy the bundled BST file
+            with open(self.bst_path, 'r', encoding='utf-8') as src, \
+                    open(temp_bst_path, 'w', encoding='utf-8') as dst:
+                dst.write(src.read())
+            
+            # Create the LaTeX document
+            with open(tex_path, 'w', encoding='utf-8') as f:
+                f.write(r'''\documentclass{article}
 \begin{document}
 \nocite{*}
 \bibliographystyle{temp}
 \bibliography{temp}
 \end{document}
 ''')
-                
-                # Create the aux file
-                with open(aux_path, 'w', encoding='utf-8') as f:
-                    f.write(r'''\relax
+            
+            # Create the aux file
+            with open(aux_path, 'w', encoding='utf-8') as f:
+                f.write(r'''\relax
 \citation{*}
 \bibstyle{temp}
 \bibdata{temp}
 ''')
-                
-                # Run bibtex
-                bibtex_proc = subprocess.run(
-                    ["bibtex", "temp"],
-                    cwd=temp_dir,
-                    capture_output=True,
-                    text=True
-                )
-                
-                if bibtex_proc.returncode != 0:
-                    return f'<div class="error">BibTeX error: {bibtex_proc.stderr}</div>'
-                
-                # Read the generated BBL file
-                if os.path.exists(bbl_path):
-                    return self._process_bbl_file(bbl_path)
-                else:
-                    return '<div class="error">BibTeX did not generate a BBL file</div>'
-        
-        except Exception as e:
-            return f'<div class="error">Error processing bibliography: {str(e)}</div>'
+            
+            # Run bibtex
+            bibtex_proc = subprocess.run(
+                ["bibtex", "temp"],
+                cwd=temp_dir,
+                capture_output=True,
+                text=True
+            )
+            
+            if bibtex_proc.returncode != 0:
+                return f'<div class="error">BibTeX error: {bibtex_proc.stderr}</div>'
+            
+            # Read the generated BBL file
+            if os.path.exists(bbl_path):
+                return self._process_bbl_file(bbl_path)
+            else:
+                return '<div class="error">BibTeX did not generate a BBL file</div>'
     
     def _process_bbl_file(self, bbl_path):
         """Extract and convert bibliography entries from a BBL file to HTML."""
