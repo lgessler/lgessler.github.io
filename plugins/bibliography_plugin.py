@@ -202,12 +202,33 @@ class BibliographyAsciiDocReader:
         
         if bib_match:
             # Get the content excluding the begin/end tags and any arguments
-            bib_entries = bib_match.group(1).strip()
+            bib_entries_content = bib_match.group(1).strip()
             
-            # Convert LaTeX markup to HTML
-            bib_entries = self._latex_to_html(bib_entries)
+            # Split into individual bibliography entries
+            bib_items = re.split(r'(?=\\bibitem)', bib_entries_content)
+            bib_items = [item for item in bib_items if item.strip()]
             
-            return f'<div class="bibliography"><ul>{bib_entries}</ul></div>'
+            # Extract year from each entry for sorting
+            def extract_year(entry):
+                # Look for a year pattern (4 digits, typically in brackets or after certain markers)
+                year_match = re.search(r'(\b|\D)(19|20)\d{2}(\b|\D)', entry)
+                if year_match:
+                    # Extract just the 4-digit year from the match
+                    digit_match = re.search(r'(19|20)\d{2}', year_match.group(0))
+                    if digit_match:
+                        return int(digit_match.group(0))
+                return 0  # Default for entries without a year
+            
+            # Sort entries by year in reverse chronological order
+            sorted_items = sorted(bib_items, key=extract_year, reverse=True)
+            
+            # Convert each LaTeX entry to HTML
+            html_entries = [self._latex_to_html(entry) for entry in sorted_items]
+            
+            # Join all entries into a single HTML string
+            bib_entries_html = ''.join(html_entries)
+            
+            return f'<div class="bibliography"><ul>{bib_entries_html}</ul></div>'
         else:
             return '<div class="error">Could not extract bibliography entries from BibTeX output</div>'
     
