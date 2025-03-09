@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Marquee Museum</title>
+    
+    <!-- Meta information -->
+    <meta name="author" content="Luke Gessler">
+    <meta name="description" content="Welcome to my <marquee> museum! (function(){ var colors = ["#e87d7d", "#e88a7d", "#e8977d", "#e8a47d", "#e8b07d", "#e8bd7d", "#e8ca7d", "#e8d77d", "#e8e47d", "#dfe87d", "#d3e87d", "#c6e87d", "#b9e87d", "#ace87d", "#9fe87d", "#92e87d", "#86e87d", "#7de881", "#7de88e", "#7de89b", "#7de8a8", "#7de8b5", "#7de8c1", "#7de8ce", "#7de8db", "#7de8e8", "#7ddbe8", "#7dcee8", "#7dc1e8", "#7db5e8", "#7da8e8", "#7d9be8", "#7d8ee8", "#7d81e8", "#867de8", "#927de8", "#9f7de8", "#ac7de8", "#b97de8", "#c67de8", "#d37de8", "#df7de8 …">
+   
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://lgessler.com/theme/css/style.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- BibTeX JS for publications -->
+    <script type="text/javascript" src="https://cdn.rawgit.com/pcooksey/bibtex-js/ef59e62c/src/bibtex_js.js"></script>
+    
+</head>
+<body>
+    <div id="content" class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- <h1 class="title">Luke Gessler</h1> -->
+    <article class="page">
+        <header>
+            <h1>Marquee Museum</h1>
+        </header>
+        <div class="content">
+            <div id="preamble">
+<div class="sectionbody">
+<div style="background: linear-gradient(to right, orange , yellow, green, cyan, blue, violet)">
+<marquee id="marky" style="font-family: Comic Sans MS;color:red;font-size:24px;padding-bottom:-32px;padding-top:-20px;" behavior="alternate" height="200" direction="down">
+<marquee behavior="alternate">Welcome to my &lt;marquee&gt; museum!</marquee>
+</marquee>
+</div>
+<script>
+(function(){
+var colors =
+["#e87d7d",
+"#e88a7d",
+"#e8977d",
+"#e8a47d",
+"#e8b07d",
+"#e8bd7d",
+"#e8ca7d",
+"#e8d77d",
+"#e8e47d",
+"#dfe87d",
+"#d3e87d",
+"#c6e87d",
+"#b9e87d",
+"#ace87d",
+"#9fe87d",
+"#92e87d",
+"#86e87d",
+"#7de881",
+"#7de88e",
+"#7de89b",
+"#7de8a8",
+"#7de8b5",
+"#7de8c1",
+"#7de8ce",
+"#7de8db",
+"#7de8e8",
+"#7ddbe8",
+"#7dcee8",
+"#7dc1e8",
+"#7db5e8",
+"#7da8e8",
+"#7d9be8",
+"#7d8ee8",
+"#7d81e8",
+"#867de8",
+"#927de8",
+"#9f7de8",
+"#ac7de8",
+"#b97de8",
+"#c67de8",
+"#d37de8",
+"#df7de8",
+"#e87de4",
+"#e87dd7",
+"#e87dca",
+"#e87dbd",
+"#e87db0",
+"#e87da4",
+"#e87d97",
+"#e87d8a",
+"#e87d7d"];
+var m = document.getElementById("marky");
+var i = 0;
+var s;
+
+m.addEventListener("bounce", () => console.log("hi!"));
+window.setInterval(function() {
+  m.setAttribute("scrollamount", 10 + 3 * Math.cos(++i / 5));
+  m.style.color = colors[i % colors.length];
+}, 240);
+
+m.style.transition = "500ms ease all";
+window.setInterval(function() {
+  s = "rotate(" + (3 * (0.5 + Math.random()) * Math.sin(i / 5)) + "deg)"
+      + "skewY(" + 5 * Math.sin(i / 10) * (0.5 + Math.random()) +"deg)"
+      + "skewX(" + 5 * Math.cos(i / 10) * (0.5 + Math.random()) +"deg)"
+      + "scaleX(" + (1 + 0.25 * Math.cos(i / 8) * (0.5 + Math.random())) + ")"
+      + "scaleY(" + (1 + 0.25 * Math.sin(i / 8) * (0.5 + Math.random())) + ")";
+  m.style.transform = s;
+}, 20);
+
+})();
+</script>
+<div class="paragraph"><p>The <a href="https://en.wikipedia.org/wiki/Marquee_element"><code>&lt;marquee&gt;</code> element</a> is from a different time in browser history, when it was more acceptable to make websites with whimsy. These days, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/marquee">bleeding hearts accuse it of being user-hostile and discourage its use</a>, but every major web browser continues to support it. This is my field journal of <code>&lt;marquee&gt;</code> tags still roaming the wild web.</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://www.costarastrology.com">"=WILL PAY U $5,000="</a> (2019-08-22, thanks again to EC)
+</p>
+</li>
+<li>
+<p>
+<a href="https://web.archive.org/web/20190109091748/https://www.si.edu/visit/hours">"All Smithsonian museums and the National Zoo are closed due to the federal government shutdown."</a> (2019-01-09, thanks to EC)
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.vaniprakashan.in/details.php?lang=H&amp;prod_id=730&amp;title=%E0%A4%95%E0%A4%B2%20%E0%A4%AA%E0%A4%B0%E0%A4%B8%E0%A5%8B%E0%A4%82%20%E0%A4%95%E0%A5%87%20%E0%A4%AC%E0%A4%B0%E0%A4%B8%E0%A5%8B%E0%A4%82">"WE ARE LOOKING TO IMPROVE YOUR FAVORITE WEBSITE"</a> (2018-08-19)
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.cnszxyj.com">It&#8217;s hidden&#8212;can you spot it?</a> (2018-08-09)
+</p>
+</li>
+<li>
+<p>
+<a href="http://panciera.ch">This website consists of a single period inside of a marquee tag</a> (2018-08-07)
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.eureast.kiev.ua">"On the site you will find the most relevant topics from the life of the Arab Diaspora in Ukraine"</a> (2018-08-07)
+</p>
+</li>
+<li>
+<p>
+<a href="http://guido-tesch.de">A strange German page</a> (2018-08-07)
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.acic-tech.be">A video surveillance company&#8217;s page</a> (2018-08-07)
+</p>
+</li>
+<li>
+<p>
+<a href="http://nongpakoa.go.th">The page of a Thai local government organization</a> (2018-08-07)
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.linguistics.ucsb.edu/faculty/stgries/">Stefan Th. Gries' personal page</a> (2018-07-13)
+</p>
+</li>
+<li>
+<p>
+<a href="http://thecrystalcornerbar.com/">The Crystal Corner</a>, a historic dive bar in Madison, Wisconsin (2018-07-13)
+</p>
+</li>
+<li>
+<p>
+<a href="http://ijdl.org/">International Journal of Dravidian Linguistics</a> (2018-07-02)
+</p>
+</li>
+<li>
+<p>
+<a href="https://tilde.town/">Tilde Town</a> (2020-08-28)
+</p>
+</li>
+</ul></div>
+<script>
+var disqus_config = function () {
+  this.page.url = 'https://lgessler.com/marquees.html';
+  this.page.identifier = '/marquees';
+};
+(function() { // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+  s.src = 'https://lgessler-com.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+        </div>
+    </article>
+            </div>
+        </div>
+    </div>
+    
+    <footer id="postamble" class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    <p>&copy; Luke Gessler 2025</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="https://lgessler.com/theme/js/main.js"></script>
+</body>
+</html> 
