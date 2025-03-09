@@ -1,6 +1,6 @@
 = Luke Gessler
 :date: 2023-06-01
-:modified: 2023-06-01
+:modified: 2025-03-09
 :summary: Personal website of Luke Gessler
 
 image::static/luke.jpg[alt="Luke Gessler", role="profile-image", width=160, height=160]
