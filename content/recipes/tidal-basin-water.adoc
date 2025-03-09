@@ -1,0 +1,45 @@
+= Tidal Basin Water
+:date: 2023-03-12
+
+== Introduction
+This is a gin-based drink that aims to capture the flavors and feeling of spring.
+It is named for the link:https://en.wikipedia.org/wiki/Tidal_Basin[Tidal Basin] in Washington, D.C., the home of many of D.C.'s fabulous cherry blossom trees.
+
+This recipe distinctively features a gin infused with rose petals, lemon oleo saccharum simple syrup, and the use of a variety of floral and fruity ingredients, all of which combine to give the drink a complex but still delicate and light aromatic character.
+A more floral gin like Hendrick's might be best, but I used this recipe with great success using Beefeater, a London Dry.
+
+== Ingredients
+* 1750mL gin
+* 100 rose petals
+* 440mL triple sec
+* 440mL tart cherry juice
+* 440mL lemon juice
+* 350mL lemon oleo saccharum simple syrup
+* 220g tart cherry preserves
+* 30mL peach schnapps
+* _optional_ Several drops of rosewater
+* _optional_ Several drops of orange blossom water
+* 4L club soda
+
+== Recipe
+1. Infuse gin with rose petals, letting sit at room temperature for 12 hours before straining.
+2. In a mixing bowl, decant some (~500mL) of the gin and muddle the tart cherry preserves so that no clumps remain.
+3. Transfer mixed gin and preserves to serving vessel, and combine all ingredients except club soda. Mix well.
+4. Add several cubes of ice and club soda.
+5. Serve over ice.
+
+++++
+<script>
+var disqus_config = function () {
+  this.page.url = 'https://lgessler.com/recipes/tidal-basin-water.html';
+  this.page.identifier = '/recipes/tidal-basin-water';
+};
+(function() { // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+  s.src = 'https://lgessler-com.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+++++ 

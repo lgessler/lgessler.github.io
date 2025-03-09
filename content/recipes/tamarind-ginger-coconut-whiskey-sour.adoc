@@ -1,0 +1,33 @@
+= Tamarind Ginger Coconut Whiskey Sour
+:date: 2022-05-31
+
+== Introduction
+This is a southeast Asian take on a whiskey sour that packs a punch of savory and tangy flavors.
+
+== Ingredients
+* 750 mL mid shelf bourbon, such as Four Roses
+* 750 mL coconut liqueur, such as Malibu
+* 500 mL tamarind concentrate
+* 330 mL lime juice (around 20 limes)
+* 1 can Coco Lopez
+* _optional_ 400 mL pineapple juice
+
+== Recipe
+1. Mix all ingredients together.
+2. Serve over ice.
+
+++++
+<script>
+var disqus_config = function () {
+  this.page.url = 'https://lgessler.com/recipes/tamarind-ginger-coconut-whiskey-sour.html';
+  this.page.identifier = '/recipes/tamarind-ginger-coconut-whiskey-sour';
+};
+(function() { // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+  s.src = 'https://lgessler-com.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+++++ 

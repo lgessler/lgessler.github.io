@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="{% if DEFAULT_LANG %}{{ DEFAULT_LANG }}{% else %}en{% endif %}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{{ SITENAME }}{% endblock %}</title>
+    
+    <!-- Meta information -->
+    <meta name="author" content="{{ AUTHOR }}">
+    <meta name="description" content="{% block description %}{{ SITENAME }}{% endblock %}">
+   
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ SITEURL }}/theme/css/style.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- BibTeX JS for publications -->
+    <script type="text/javascript" src="https://cdn.rawgit.com/pcooksey/bibtex-js/ef59e62c/src/bibtex_js.js"></script>
+    
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <div id="content" class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- <h1 class="title">{{ SITENAME }}</h1> -->
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+    
+    <footer id="postamble" class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    <p>&copy; {{ AUTHOR }} {{ CURRENT_YEAR }}</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="{{ SITEURL }}/theme/js/main.js"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html> 

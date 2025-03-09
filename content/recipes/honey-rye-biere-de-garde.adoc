@@ -1,0 +1,48 @@
+= Honey Rye Bière de Garde
+:date: 2022-06-14
+
+== Introduction
+This is a modified version of link:https://homebrewacademy.com/biere-de-garde-recipe/[Martin Keen's Bière de Garde] with rye providing additional aromatic complexity.
+Another difference is that I went for a two-step mash at 145F and 152F to try to get some additional efficiency.
+My batch started at 1.070 and ended at 1.003 for a whopping 8.79% ABV, though the final product is in my opinion very smooth for how strong it is.
+
+I let the beer sit in the bottle for 6 months before consuming: when young, the beer was still a little harsh and had an exceptionally creamy mouthfeel, perhaps too creamy.
+After a few months, the culture has done a good job of cleaning up some off flavors, and you're left with a very dry and aromatic beer with a fine lacy carb and an appropriate amount of creamy mouthfeel.
+
+== Ingredients
+* 8lb pale ale malt
+* 2lb Vienna malt
+* 1lb Munich malt
+* 1lb rye malt
+* 0.5lb aromatic malt
+* 1.5lb high quality raw honey
+* 3oz Tettnang hops pellets
+* 1oz Hallertauer hops pellets
+* 1 package WLP590 liquid yeast (French Saison Ale)
+
+== Recipe
+1. Prepare starter culture with WLP590.
+2. Fill kettle with 7.5 gallons of water and adjust mineral profile.
+3. Heat water to strike temperature of 1.
+4. Add grains, then mash at 145F for 60m.
+5. Mash at 158F for 60m.
+6. Add honey.
+7. Boil for 60m. At 60m, add 2oz Tettnang; at 15m, add 1oz Hallertauer; at 0m, add 1oz Tettnang.
+8. Let sit in fermenter for at least 3 weeks at 68F.
+9. Bottle and let age for at least 2 months.
+
+++++
+<script>
+var disqus_config = function () {
+  this.page.url = 'https://lgessler.com/recipes/honey-rye-biere-de-garde.html';
+  this.page.identifier = '/recipes/honey-rye-biere-de-garde';
+};
+(function() { // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+  s.src = 'https://lgessler-com.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+++++ 

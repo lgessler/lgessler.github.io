@@ -1,0 +1,50 @@
+= Autumn Spiced Syrup
+:date: 2023-12-02
+
+== Introduction
+What is the ultimate autumn cocktail?
+This is the question that came to me with the first cold morning of October, and this is an important part of my answer.
+We're going to make a syrup with some fairly expected spices, and importantly, the sugar is going to be brown in order to incorporate the taste of caramelized sugar.
+The recipe below calls for brown sugar, but I actually used some link:https://en.wikipedia.org/wiki/Palm_sugar[palm sugar] lying around my cupboard that I needed to use up, which inched my syrup a little more towards more floral notes.
+It'd probably be a waste to use maple syrup in the syrup directly, but consider mixing a bit into a cocktail as you're using the syrup.
+
+So what was my ultimate autumn cocktail?
+I tried a few different things with this syrup, and my favorite one was the following, served over a large piece of ice:
+
+* 10mL autumn spiced syrup
+* 30mL applejack (I used Laird's)
+* 15mL Batavia Arrack van Oosten
+* 1 orange peel, expressed (or a couple drops of orange bitters)
+
+== Ingredients
+* 1/4 of a whole nutmeg seed, chopped into a few pieces
+* 1 2" stick of cinnamon (I used Chinese cinnamon, _cinnamomum cassia_)
+* 5 cloves
+* 8 allspice berries, cracked
+* 5 whole black peppercorns, cracked
+* 1 cup brown sugar
+* 1 cup water
+
+== Recipe
+1. Bring water to a boil in a pot
+2. Add sugar and stir to dissolve
+3. Reduce heat to a low simmer
+4. Add all spices and continue simmering for two minutes
+5. Remove from heat and let stand for around 60 minutes
+6. Strain into a container and refrigerate once cooled
+
+++++
+<script>
+var disqus_config = function () {
+  this.page.url = 'https://lgessler.com/recipes/autumn-spiced-syrup.html';
+  this.page.identifier = '/recipes/autumn-spiced-syrup';
+};
+(function() { // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+  s.src = 'https://lgessler-com.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+++++ 
