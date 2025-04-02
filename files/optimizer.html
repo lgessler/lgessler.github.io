@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Optimizer Visualization</title>
+    <script src="https://cdn.plot.ly/plotly-3.0.1.min.js"></script>
+    <style>
+        /* Make html/body fill the viewport and remove default margin/padding */
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Prevent body scrollbars if content fits */
+            font-family: sans-serif;
+        }
+        /* Use flexbox for the main layout */
+        body {
+            display: flex;
+            flex-direction: row;
+            gap: 10px; /* Adjust gap between controls and plot */
+            padding: 10px; /* Add some padding around the edges */
+            box-sizing: border-box; /* Include padding in height/width */
+        }
+        #controls {
+            width: 350px; /* Fixed width for controls */
+            flex-shrink: 0; /* Prevent controls from shrinking */
+            height: 100%; /* Fill available vertical space */
+            display: flex;
+            flex-direction: column;
+            gap: 10px; /* Space between control groups */
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            overflow-y: auto; /* Allow controls to scroll if they overflow */
+            box-sizing: border-box;
+        }
+        #plotContainer {
+            flex-grow: 1; /* Allow plot container to take remaining width */
+            height: 100%; /* Fill available vertical space */
+            min-width: 400px; /* Minimum width for the plot area */
+            display: flex; /* Use flex to make the plotDiv fill this container */
+            box-sizing: border-box;
+        }
+        /* Make the actual plot div fill its container */
+        #plotDiv {
+            width: 100%;
+            height: 100%;
+        }
+        .control-group {
+            border: 1px solid #eee;
+            padding: 10px;
+            border-radius: 4px;
+            background-color: #fff;
+        }
+        .control-group legend {
+            font-weight: bold;
+            padding: 0 5px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+        }
+        input[type="range"], input[type="number"], select {
+            width: calc(100% - 10px); /* Adjust width */
+            margin-bottom: 5px;
+            box-sizing: border-box; /* Include padding/border in width */
+        }
+        input[type="number"] {
+             width: 80px; /* Smaller width for number inputs */
+        }
+        output {
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        button {
+            padding: 8px 12px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            margin-top: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #animationControls button {
+             margin-right: 5px;
+        }
+        .hidden {
+            display: none;
+        }
+        #functionDescription {
+            font-size: 0.8em;
+            margin-top: 5px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="controls">
+        <h2>Controls</h2>
+
+        <fieldset class="control-group">
+            <legend>Loss Function</legend>
+            <label for="lossFunctionSelect">Select Function:</label>
+			<select id="lossFunctionSelect">
+				<option value="test_function" selected>Complex Wells</option>
+				<option value="beale_function">Beale Function</option>
+				<option value="rosenbrock_function">Rosenbrock Function</option>
+				<option value="simple_quadratic">Simple Quadratic</option>
+				<option value="multi_well">Multiple Wells (Alternative)</option>
+			</select>
+             <p id="functionDescription">Multiple local minima. Global min near (-3, -1).</p>
+        </fieldset>
+
+        <fieldset class="control-group">
+            <legend>Starting Point & Steps</legend>
+            <label for="startX">Start X:</label>
+            <input type="number" id="startX" value="5" step="0.1">
+            <label for="startY">Start Y:</label>
+            <input type="number" id="startY" value="5" step="0.1">
+            <label for="nSteps">Number of Steps:</label>
+            <input type="number" id="nSteps" value="150" min="10" max="1000">
+        </fieldset>
+
+        <fieldset class="control-group">
+            <legend>Optimizer</legend>
+            <label for="optimizerSelect">Select Optimizer:</label>
+            <select id="optimizerSelect">
+                <option value="adam" selected>Adam</option>
+                <option value="sgd">SGD</option>
+                <option value="adagrad">AdaGrad</option>
+                <option value="rmsprop">RMSProp</option>
+            </select>
+        </fieldset>
+
+        <fieldset class="control-group">
+            <legend>Hyperparameters</legend>
+            <div>
+                <label for="lrSlider">Learning Rate (lr): <output id="lrValue">0.05</output></label>
+                <input type="range" id="lrSlider" min="0.001" max="0.5" step="0.001" value="0.05">
+            </div>
+             <div id="beta1Control">
+                <label for="beta1Slider">Beta 1 (β₁): <output id="beta1Value">0.9</output></label>
+                <input type="range" id="beta1Slider" min="0.2" max="0.999" step="0.001" value="0.9">
+            </div>
+            <div id="beta2Control">
+                 <label for="beta2Slider">Beta 2 / Beta (β₂/β): <output id="beta2Value">0.999</output></label>
+                <input type="range" id="beta2Slider" min="0.5" max="0.9999" step="0.0001" value="0.999">
+            </div>
+             <div id="epsilonControl">
+                <label for="epsilonSlider">Epsilon (ε): <output id="epsilonValue">1e-8</output></label>
+                <input type="range" id="epsilonSlider" min="1e-9" max="1e-6" step="1e-9" value="1e-8">
+            </div>
+        </fieldset>
+
+        <fieldset class="control-group" id="animationControls">
+            <legend>Animation</legend>
+            <button id="playPauseButton">Play</button>
+             <label for="speedSlider">Speed (steps/sec): <output id="speedValue">100</output></label>
+             <input type="range" id="speedSlider" min="1" max="100" step="1" value="10">
+             <label for="stepSlider">Current Step: <output id="stepValue">0</output> / <span id="totalStepsDisplay">150</span></label>
+             <input type="range" id="stepSlider" min="0" max="149" step="1" value="0" style="width: 100%;">
+        </fieldset>
+
+        <button id="redrawButton">Redraw Plot</button>
+
+    </div>
+
+    <div id="plotContainer">
+         <div id="plotDiv"></div> </div>
+
+    <script>
+        // --- Configuration & State ---
+        const plotDiv = document.getElementById('plotDiv'); // Target for Plotly
+        const controls = {
+            lossFunctionSelect: document.getElementById('lossFunctionSelect'),
+            functionDescription: document.getElementById('functionDescription'),
+            startX: document.getElementById('startX'),
+            startY: document.getElementById('startY'),
+            nSteps: document.getElementById('nSteps'),
+            optimizerSelect: document.getElementById('optimizerSelect'),
+            lrSlider: document.getElementById('lrSlider'),
+            lrValue: document.getElementById('lrValue'),
+            beta1Control: document.getElementById('beta1Control'),
+            beta1Slider: document.getElementById('beta1Slider'),
+            beta1Value: document.getElementById('beta1Value'),
+            beta2Control: document.getElementById('beta2Control'),
+            beta2Slider: document.getElementById('beta2Slider'),
+            beta2Value: document.getElementById('beta2Value'),
+            epsilonControl: document.getElementById('epsilonControl'),
+            epsilonSlider: document.getElementById('epsilonSlider'),
+            epsilonValue: document.getElementById('epsilonValue'),
+            playPauseButton: document.getElementById('playPauseButton'),
+            speedSlider: document.getElementById('speedSlider'),
+            speedValue: document.getElementById('speedValue'),
+            stepSlider: document.getElementById('stepSlider'),
+            stepValue: document.getElementById('stepValue'),
+            totalStepsDisplay: document.getElementById('totalStepsDisplay'),
+            redrawButton: document.getElementById('redrawButton')
+        };
+
+        let currentPath = [];
+        let currentZPath = [];
+        let animationState = {
+            intervalId: null,
+            isPlaying: false,
+            currentStep: 0,
+            speed: 100
+        };
+        let currentLossFunction = null;
+        let plotInitialized = false;
+        const NUMERICAL_EPS = 1e-5;
+        let storedCameraState = null;
+
+        // --- Loss Functions ---
+		const lossFunctions = {
+			test_function: {
+				func: (x, y) => {
+					const base = 0.01 * (x**2 + y**2);
+					const well1 = -3 * Math.exp(-0.2 * ((x-2)**2 + (y-2)**2));
+					const well2 = -5 * Math.exp(-0.1 * ((x+3)**2 + (y+1)**2));
+					const well3 = -2 * Math.exp(-0.2 * ((x-1)**2 + (y+3)**2));
+					return base + well1 + well2 + well3;
+				},
+				range: [-6, 6],
+				description: "Multiple local minima. Global min near (-3, -1).",
+				startPoint: [5, 5] // Default starting point
+			},
+			beale_function: {
+				func: (x, y) => {
+					const term1 = (1.5 - x + x*y)**2;
+					const term2 = (2.25 - x + x*y**2)**2;
+					const term3 = (2.625 - x + x*y**3)**2;
+					const result = term1 + term2 + term3;
+					return result + 1;
+				},
+				range: [-4.5, 4.5],
+				description: "Global minimum at (3, 0.5). Sharp valleys.",
+				startPoint: [1, 1] // Starting away from minimum
+			},
+			rosenbrock_function: {
+				func: (x, y) => {
+					return (1-x)**2 + 100*(y - x**2)**2;
+				},
+				range: [-2, 2],
+				description: "Banana-shaped valley. Global min at (1, 1).",
+				startPoint: [-1, -1] // Start in a challenging position
+			},
+			simple_quadratic: {
+				func: (x, y) => {
+					return 0.2 * x**2 + 5 * y**2;
+				},
+				range: [-2, 2],
+				description: "Simple quadratic function with steep y-axis. Global min at (0, 0).",
+				startPoint: [2, 0.5] // Start offset from minimum
+			},
+			multi_well: {
+				func: (x, y) => {
+					const base = 0.01 * (x**2 + y**2);
+					const well1 = -3 * Math.exp(-0.2 * ((x-2)**2 + (y-2)**2));
+					const well2 = -5 * Math.exp(-0.1 * ((x+3)**2 + (y-1)**2));
+					const well3 = -2 * Math.exp(-0.2 * ((x-1)**2 + (y+3)**2));
+					return base + well1 + well2 + well3;
+				},
+				range: [-6, 6],
+				description: "Multiple wells with local minima at (2,2), (-3,-1), and (1,-3). Global min at (-3,-1).",
+				startPoint: [0, 0] // Start in the middle
+			}
+		};
+
+        // --- Gradient Calculation ---
+        function compute_gradients(lossFunc, x, y) {
+            const fx_plus = lossFunc(x + NUMERICAL_EPS, y);
+            const fx_minus = lossFunc(x - NUMERICAL_EPS, y);
+            const fy_plus = lossFunc(x, y + NUMERICAL_EPS);
+            const fy_minus = lossFunc(x, y - NUMERICAL_EPS);
+            const grad_x = (fx_plus - fx_minus) / (2 * NUMERICAL_EPS);
+            const grad_y = (fy_plus - fy_minus) / (2 * NUMERICAL_EPS);
+            return [grad_x, grad_y];
+        }
+
+        // --- Optimizer Implementations ---
+        const optimizers = {
+             sgd: (params, grads, state, lr) => {
+                 params[0] -= lr * grads[0];
+                 params[1] -= lr * grads[1];
+                 return params;
+             },
+             adagrad: (params, grads, state, lr, beta1, beta2, eps) => {
+                 if (!state.sum_sq_grads) state.sum_sq_grads = [0.0, 0.0];
+                 state.sum_sq_grads[0] += grads[0]**2;
+                 state.sum_sq_grads[1] += grads[1]**2;
+                 params[0] -= lr * grads[0] / (Math.sqrt(state.sum_sq_grads[0]) + eps);
+                 params[1] -= lr * grads[1] / (Math.sqrt(state.sum_sq_grads[1]) + eps);
+                 return params;
+             },
+             rmsprop: (params, grads, state, lr, beta1, beta_rmsprop, eps) => {
+                 if (!state.v) state.v = [0.0, 0.0];
+                 state.v[0] = beta_rmsprop * state.v[0] + (1 - beta_rmsprop) * grads[0]**2;
+                 state.v[1] = beta_rmsprop * state.v[1] + (1 - beta_rmsprop) * grads[1]**2;
+                 params[0] -= lr * grads[0] / (Math.sqrt(state.v[0]) + eps);
+                 params[1] -= lr * grads[1] / (Math.sqrt(state.v[1]) + eps);
+                 return params;
+             },
+             adam: (params, grads, state, lr, beta1, beta2, eps) => {
+                 if (!state.m) {
+                     state.step = 0;
+                     state.m = [0.0, 0.0];
+                     state.v = [0.0, 0.0];
+                 }
+                 state.step += 1;
+                 state.m[0] = beta1 * state.m[0] + (1 - beta1) * grads[0];
+                 state.m[1] = beta1 * state.m[1] + (1 - beta1) * grads[1];
+                 state.v[0] = beta2 * state.v[0] + (1 - beta2) * grads[0]**2;
+                 state.v[1] = beta2 * state.v[1] + (1 - beta2) * grads[1]**2;
+                 const m_hat_0 = state.m[0] / (1 - beta1**state.step);
+                 const m_hat_1 = state.m[1] / (1 - beta1**state.step);
+                 const v_hat_0 = state.v[0] / (1 - beta2**state.step);
+                 const v_hat_1 = state.v[1] / (1 - beta2**state.step);
+                 params[0] -= lr * m_hat_0 / (Math.sqrt(v_hat_0) + eps);
+                 params[1] -= lr * m_hat_1 / (Math.sqrt(v_hat_1) + eps);
+                 return params;
+             }
+        };
+
+        // --- Optimization Runner ---
+        function runOptimization() {
+             // (Same implementation as before)
+            const startX = parseFloat(controls.startX.value);
+            const startY = parseFloat(controls.startY.value);
+            const nSteps = parseInt(controls.nSteps.value);
+            const optimizerName = controls.optimizerSelect.value;
+            const lr = parseFloat(controls.lrSlider.value);
+            const beta1 = parseFloat(controls.beta1Slider.value);
+            const beta2 = parseFloat(controls.beta2Slider.value);
+            const eps = parseFloat(controls.epsilonSlider.value);
+            const lossFunc = currentLossFunction.func;
+            const optimizerFunc = optimizers[optimizerName];
+
+            let params = [startX, startY];
+            const path = [[startX, startY]];
+            let state = {};
+
+            for (let i = 0; i < nSteps; i++) {
+                const grads = compute_gradients(lossFunc, params[0], params[1]);
+                if (isNaN(grads[0]) || isNaN(grads[1])) {
+                    console.warn(`NaN gradient at step ${i+1}. Stopping.`); break;
+                }
+                params = optimizerFunc([...params], grads, state, lr, beta1, beta2, eps);
+                if (isNaN(params[0]) || isNaN(params[1])) {
+                     console.warn(`NaN params at step ${i+1}. Stopping.`); break;
+                 }
+                path.push([...params]);
+            }
+
+            currentPath = path;
+            currentZPath = path.map(p => lossFunc(p[0], p[1]));
+
+            animationState.currentStep = 0;
+            const actualSteps = currentPath.length - 1;
+            controls.stepSlider.max = actualSteps;
+            controls.stepSlider.value = 0;
+            controls.stepValue.textContent = 0;
+            controls.totalStepsDisplay.textContent = actualSteps + 1;
+            storedCameraState = null; // Reset stored camera state on new optimization
+
+            return { path, zPath: currentZPath };
+        }
+
+        // --- Plotting ---
+        function createPlotLayout(title, range) {
+            return {
+                title: title,
+                scene: {
+                    xaxis: { title: 'X', range: range, autorange: false }, // Use fixed range from function def
+                    yaxis: { title: 'Y', range: range, autorange: false }, // Use fixed range from function def
+                    zaxis: { title: 'Loss', autorange: true }, // Autorange Z based on data
+                    aspectmode: 'cube',
+                    camera: { eye: { x: 1.5, y: 1.5, z: 1.5 } }
+                },
+                margin: { l: 0, r: 0, b: 0, t: 40 }, // Minimal margins
+                hovermode: 'closest',
+                uirevision: 'constant'
+            };
+        }
+
+         function createSurfaceData(lossFunc, range) {
+             // (Same implementation as before)
+             const N = 100;
+             const x_vals = []; const y_vals = []; const z_vals = [];
+             const step = (range[1] - range[0]) / (N - 1);
+             for (let i = 0; i < N; i++) {
+                 x_vals.push(range[0] + i * step); y_vals.push(range[0] + i * step);
+             }
+             for (let i = 0; i < N; i++) {
+                 const row = [];
+                 for (let j = 0; j < N; j++) row.push(lossFunc(x_vals[j], y_vals[i]));
+                 z_vals.push(row);
+             }
+             return { type: 'surface', x: x_vals, y: y_vals, z: z_vals, colorscale: 'Viridis', opacity: 0.7, showscale: false, name: 'Loss Surface', hoverinfo: 'skip' };
+         }
+
+        function createPathTraces() {
+             // (Same implementation as before)
+             const fullPathTrace = { type: 'scatter3d', mode: 'lines', x: [], y: [], z: [], line: { color: 'red', width: 6 }, name: 'Optimizer Path', hoverinfo: 'skip' };
+             const markerTrace = { type: 'scatter3d', mode: 'markers', x: [], y: [], z: [], marker: { color: 'black', size: 8, symbol: 'diamond' }, name: 'Current Position', hoverinfo: 'x+y+z' };
+             return [fullPathTrace, markerTrace];
+         }
+
+        function initializePlot() {
+            // (Essentially the same, uses Plotly.newPlot)
+            const lossInfo = lossFunctions[controls.lossFunctionSelect.value];
+            currentLossFunction = lossInfo;
+            controls.functionDescription.textContent = lossInfo.description;
+
+            const { path, zPath } = runOptimization();
+            const surfaceData = createSurfaceData(currentLossFunction.func, currentLossFunction.range);
+            const [fullPathTrace, markerTrace] = createPathTraces();
+
+             fullPathTrace.x = path.map(p => p[0]); fullPathTrace.y = path.map(p => p[1]); fullPathTrace.z = zPath;
+             if (path.length > 0) {
+                 markerTrace.x = [path[0][0]]; markerTrace.y = [path[0][1]]; markerTrace.z = [zPath[0]];
+             }
+
+            const layout = createPlotLayout(`Optimizer Path on ${controls.lossFunctionSelect.options[controls.lossFunctionSelect.selectedIndex].text}`, currentLossFunction.range);
+
+            // Use Plotly.newPlot and pass the plotDiv element
+             Plotly.newPlot(plotDiv, [surfaceData, fullPathTrace, markerTrace], layout, {responsive: true});
+             plotInitialized = true;
+             animateStep(0); // Ensure marker is visible initially
+        }
+
+        function updatePlot() {
+             // (Uses Plotly.restyle - should preserve camera due to uirevision)
+             if (!plotInitialized) { initializePlot(); return; }
+             pauseAnimation();
+
+             const { path, zPath } = runOptimization();
+             const updateData = {
+                 x: [path.map(p => p[0]), path.length > 0 ? [path[0][0]] : []],
+                 y: [path.map(p => p[1]), path.length > 0 ? [path[0][1]] : []],
+                 z: [zPath, path.length > 0 ? [zPath[0]] : []]
+             };
+             Plotly.restyle(plotDiv, updateData, [1, 2]); // Update traces 1 and 2
+
+             animationState.currentStep = 0;
+             controls.stepSlider.value = 0;
+             controls.stepValue.textContent = 0;
+             animateStep(0);
+        }
+
+		function updateStartingPoint() {
+			const lossInfo = lossFunctions[controls.lossFunctionSelect.value];
+			if (lossInfo.startPoint) {
+				controls.startX.value = lossInfo.startPoint[0];
+				controls.startY.value = lossInfo.startPoint[1];
+			}
+		}
+
+        function redrawPlot() {
+             // (Uses Plotly.react - should preserve camera due to uirevision)
+             plotInitialized = false;
+             pauseAnimation();
+
+             const lossInfo = lossFunctions[controls.lossFunctionSelect.value];
+             currentLossFunction = lossInfo;
+             controls.functionDescription.textContent = lossInfo.description;
+
+             const { path, zPath } = runOptimization();
+             const surfaceData = createSurfaceData(currentLossFunction.func, currentLossFunction.range);
+             const [fullPathTrace, markerTrace] = createPathTraces();
+
+             fullPathTrace.x = path.map(p => p[0]); fullPathTrace.y = path.map(p => p[1]); fullPathTrace.z = zPath;
+              if (path.length > 0) {
+                 markerTrace.x = [path[0][0]]; markerTrace.y = [path[0][1]]; markerTrace.z = [zPath[0]];
+             }
+             const layout = createPlotLayout(`Optimizer Path on ${controls.lossFunctionSelect.options[controls.lossFunctionSelect.selectedIndex].text}`, currentLossFunction.range);
+
+             Plotly.react(plotDiv, [surfaceData, fullPathTrace, markerTrace], layout); // Use react for full redraw
+             plotInitialized = true;
+
+             animationState.currentStep = 0;
+             controls.stepSlider.value = 0;
+             controls.stepValue.textContent = 0;
+             animateStep(0);
+        }
+
+        // --- Animation Logic ---
+		function animateStep(stepIndex) {
+			if (!currentPath || stepIndex < 0 || stepIndex >= currentPath.length) return;
+
+			const updateData = {
+				x: [currentPath.slice(0, stepIndex + 1).map(p => p[0]), [currentPath[stepIndex][0]]],
+				y: [currentPath.slice(0, stepIndex + 1).map(p => p[1]), [currentPath[stepIndex][1]]],
+				z: [currentZPath.slice(0, stepIndex + 1), [currentZPath[stepIndex]]]
+			};
+			Plotly.restyle(plotDiv, updateData, [1, 2]);
+
+			controls.stepSlider.value = stepIndex;
+			controls.stepValue.textContent = stepIndex;
+		}
+
+        function playAnimation() {
+            if (animationState.isPlaying || !currentPath || currentPath.length <= 1) return;
+            animationState.isPlaying = true;
+            controls.playPauseButton.textContent = 'Pause';
+
+            if (!storedCameraState && plotDiv._fullLayout && plotDiv._fullLayout.scene) {
+                storedCameraState = JSON.parse(JSON.stringify(plotDiv._fullLayout.scene.camera));
+            }
+
+            const delay = 1000 / animationState.speed;
+            animationState.intervalId = setInterval(() => {
+                animationState.currentStep++;
+                if (animationState.currentStep >= currentPath.length) {
+                    animationState.currentStep = currentPath.length - 1;
+                    pauseAnimation();
+                }
+                animateStep(animationState.currentStep);
+                if (storedCameraState) {
+                    Plotly.relayout(plotDiv, {'scene.camera': storedCameraState});
+                }
+            }, delay);
+        }
+
+        function pauseAnimation() {
+            if (!animationState.isPlaying) return;
+            clearInterval(animationState.intervalId);
+            animationState.intervalId = null;
+            animationState.isPlaying = false;
+            controls.playPauseButton.textContent = 'Play';
+            storedCameraState = null;
+        }
+
+        // --- UI Updates and Event Listeners ---
+		function updateOptimizerControls() {
+			const optimizer = controls.optimizerSelect.value;
+			const isAdam = optimizer === 'adam';
+			const isRMSProp = optimizer === 'rmsprop';
+			const needsBeta1 = isAdam;
+			const needsBeta2 = isAdam || isRMSProp;
+			const needsEpsilon = optimizer !== 'sgd';
+
+			controls.beta1Control.classList.toggle('hidden', !needsBeta1);
+			controls.beta2Control.classList.toggle('hidden', !needsBeta2);
+			controls.epsilonControl.classList.toggle('hidden', !needsEpsilon);
+
+			// Get and save the output element
+			const beta2Output = controls.beta2Value;
+
+			// Get the label element
+			const beta2Label = controls.beta2Control.querySelector('label');
+
+			// Clear the label content
+			beta2Label.innerHTML = '';
+
+			// Add the appropriate text node
+			const textNode = document.createTextNode(isRMSProp ? 'Beta (β): ' : 'Beta 2 (β₂): ');
+			beta2Label.appendChild(textNode);
+
+			// Re-append the same output element
+			beta2Label.appendChild(beta2Output);
+
+			updatePlot();
+		}
+
+        function setupSliderListeners() {
+            // (Same implementation as before)
+             const sliders = [
+                 { slider: controls.lrSlider, output: controls.lrValue, fixed: 4 },
+                 { slider: controls.beta1Slider, output: controls.beta1Value, fixed: 3 },
+                 { slider: controls.beta2Slider, output: controls.beta2Value, fixed: 4 },
+                 { slider: controls.epsilonSlider, output: controls.epsilonValue, fixed: null },
+                 { slider: controls.speedSlider, output: controls.speedValue, fixed: 0 }
+            ];
+             sliders.forEach(({ slider, output, fixed }) => {
+                 slider.addEventListener('input', () => {
+                     const value = parseFloat(slider.value);
+                     output.textContent = fixed !== null ? value.toFixed(fixed) : value.toExponential(1);
+                     if (slider === controls.speedSlider) {
+                         animationState.speed = value;
+                         if (animationState.isPlaying) { pauseAnimation(); playAnimation(); }
+                     } else { updatePlot(); }
+                 });
+             });
+             controls.stepSlider.addEventListener('input', () => {
+                 pauseAnimation();
+                 animationState.currentStep = parseInt(controls.stepSlider.value);
+                 animateStep(animationState.currentStep);
+             });
+        }
+
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log("DOM Loaded. Initializing...");
+            setupSliderListeners();
+            controls.optimizerSelect.addEventListener('change', updateOptimizerControls);
+			controls.lossFunctionSelect.addEventListener('change', function() {
+				updateStartingPoint(); // Update the starting point first
+				redrawPlot(); // Then redraw the plot
+			});
+            controls.startX.addEventListener('change', updatePlot);
+            controls.startY.addEventListener('change', updatePlot);
+            controls.nSteps.addEventListener('change', updatePlot);
+            controls.redrawButton.addEventListener('click', redrawPlot);
+            controls.playPauseButton.addEventListener('click', () => {
+                if (animationState.isPlaying) pauseAnimation(); else playAnimation();
+            });
+            updateOptimizerControls(); // Initial setup and plot draw
+			updateStartingPoint();
+            console.log("Initialization complete.");
+        });
+
+    </script>
+
+</body>
+</html>
