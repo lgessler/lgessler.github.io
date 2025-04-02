@@ -110,11 +110,12 @@
             <legend>Loss Function</legend>
             <label for="lossFunctionSelect">Select Function:</label>
 			<select id="lossFunctionSelect">
-				<option value="test_function" selected>Complex Wells</option>
+				<option value="simple_quadratic">Simple Quadratic</option>
+				<option value="test_function" selected>Two Wells</option>
+				<option value="multi_well">Three Wells</option>
+				<option value="double_well_saddle">Saddle</option>
 				<option value="beale_function">Beale Function</option>
 				<option value="rosenbrock_function">Rosenbrock Function</option>
-				<option value="simple_quadratic">Simple Quadratic</option>
-				<option value="multi_well">Multiple Wells (Alternative)</option>
 			</select>
              <p id="functionDescription">Multiple local minima. Global min near (-3, -1).</p>
         </fieldset>
@@ -164,7 +165,7 @@
             <legend>Animation</legend>
             <button id="playPauseButton">Play</button>
              <label for="speedSlider">Speed (steps/sec): <output id="speedValue">100</output></label>
-             <input type="range" id="speedSlider" min="1" max="100" step="1" value="10">
+             <input type="range" id="speedSlider" min="1" max="200" step="1" value="100">
              <label for="stepSlider">Current Step: <output id="stepValue">0</output> / <span id="totalStepsDisplay">150</span></label>
              <input type="range" id="stepSlider" min="0" max="149" step="1" value="0" style="width: 100%;">
         </fieldset>
@@ -238,20 +239,20 @@
 					const term1 = (1.5 - x + x*y)**2;
 					const term2 = (2.25 - x + x*y**2)**2;
 					const term3 = (2.625 - x + x*y**3)**2;
-					const result = term1 + term2 + term3;
+					const result = Math.min(30, term1 + term2 + term3);
 					return result + 1;
 				},
-				range: [-4.5, 4.5],
+				range: [-1.5, 6.5],
 				description: "Global minimum at (3, 0.5). Sharp valleys.",
 				startPoint: [1, 1] // Starting away from minimum
 			},
 			rosenbrock_function: {
 				func: (x, y) => {
-					return (1-x)**2 + 100*(y - x**2)**2;
+					return Math.min(30, (1-x)**2 + 100*(y - x**2)**2);
 				},
 				range: [-2, 2],
 				description: "Banana-shaped valley. Global min at (1, 1).",
-				startPoint: [-1, -1] // Start in a challenging position
+				startPoint: [-1.19, 0.98] // Start in a challenging position
 			},
 			simple_quadratic: {
 				func: (x, y) => {
@@ -271,6 +272,21 @@
 				},
 				range: [-6, 6],
 				description: "Multiple wells with local minima at (2,2), (-3,-1), and (1,-3). Global min at (-3,-1).",
+				startPoint: [0, 0] // Start in the middle
+			},
+			double_well_saddle: {
+				func: (x, y) => {
+					// Create two Gaussian wells at x=-2 and x=1
+					const well1 = -5 * Math.exp(-1.5 * ((x+2)**2)); // Deeper well at (-2, 0)
+					const well2 = -0.5 * Math.exp(-1.5 * ((x-1)**2)); // Shallower well at (1, 0)
+					// Add quadratic term for y-direction
+					const yTerm = y**2;
+					// Add a gentle quadratic base to ensure proper saddle behavior
+					const xBase = 0.1 * (x**2 + 5);
+					return xBase + well1 + well2 + yTerm;
+				},
+				range: [-5, 3],
+				description: "Double-well function with global minimum at (-2, 0), local minimum at (1, 0).",
 				startPoint: [0, 0] // Start in the middle
 			}
 		};
@@ -387,7 +403,7 @@
                 },
                 margin: { l: 0, r: 0, b: 0, t: 40 }, // Minimal margins
                 hovermode: 'closest',
-                uirevision: 'constant'
+                uirevision: 'true'
             };
         }
 
@@ -404,7 +420,7 @@
                  for (let j = 0; j < N; j++) row.push(lossFunc(x_vals[j], y_vals[i]));
                  z_vals.push(row);
              }
-             return { type: 'surface', x: x_vals, y: y_vals, z: z_vals, colorscale: 'Viridis', opacity: 0.7, showscale: false, name: 'Loss Surface', hoverinfo: 'skip' };
+             return { type: 'surface', x: x_vals, y: y_vals, z: z_vals, colorscale: 'Viridis', opacity: 0.7, showscale: false, name: 'Loss Surface', hoverinfo: 'x+y+z' };
          }
 
         function createPathTraces() {
@@ -433,8 +449,9 @@
 
             // Use Plotly.newPlot and pass the plotDiv element
              Plotly.newPlot(plotDiv, [surfaceData, fullPathTrace, markerTrace], layout, {responsive: true});
-             plotInitialized = true;
-             animateStep(0); // Ensure marker is visible initially
+             setupCameraChangeListener();
+			 plotInitialized = true;
+			 animateStep(0);
         }
 
         function updatePlot() {
@@ -495,39 +512,47 @@
         // --- Animation Logic ---
 		function animateStep(stepIndex) {
 			if (!currentPath || stepIndex < 0 || stepIndex >= currentPath.length) return;
-
+			
+			// Before updating, get the current camera state if not already saved
+			if (!storedCameraState && plotDiv._fullLayout && plotDiv._fullLayout.scene) {
+				storedCameraState = JSON.parse(JSON.stringify(plotDiv._fullLayout.scene.camera));
+			}
 			const updateData = {
 				x: [currentPath.slice(0, stepIndex + 1).map(p => p[0]), [currentPath[stepIndex][0]]],
 				y: [currentPath.slice(0, stepIndex + 1).map(p => p[1]), [currentPath[stepIndex][1]]],
 				z: [currentZPath.slice(0, stepIndex + 1), [currentZPath[stepIndex]]]
 			};
-			Plotly.restyle(plotDiv, updateData, [1, 2]);
+
+			// Create a update layout object with our stored camera position
+			const updateLayout = storedCameraState ? {'scene.camera': storedCameraState} : {};
+			
+			// Use Plotly.update which combines restyle and relayout in a single call
+			// This ensures the camera update happens simultaneously with the data update
+			Plotly.update(plotDiv, updateData, updateLayout, [1, 2]);
 
 			controls.stepSlider.value = stepIndex;
 			controls.stepValue.textContent = stepIndex;
 		}
 
         function playAnimation() {
-            if (animationState.isPlaying || !currentPath || currentPath.length <= 1) return;
-            animationState.isPlaying = true;
-            controls.playPauseButton.textContent = 'Pause';
+			if (animationState.isPlaying || !currentPath || currentPath.length <= 1) return;
+			animationState.isPlaying = true;
+			controls.playPauseButton.textContent = 'Pause';
 
-            if (!storedCameraState && plotDiv._fullLayout && plotDiv._fullLayout.scene) {
-                storedCameraState = JSON.parse(JSON.stringify(plotDiv._fullLayout.scene.camera));
-            }
+			// Ensure we have the camera state before starting animation
+			if (!storedCameraState && plotDiv._fullLayout && plotDiv._fullLayout.scene) {
+				storedCameraState = JSON.parse(JSON.stringify(plotDiv._fullLayout.scene.camera));
+			}
 
-            const delay = 1000 / animationState.speed;
-            animationState.intervalId = setInterval(() => {
-                animationState.currentStep++;
-                if (animationState.currentStep >= currentPath.length) {
-                    animationState.currentStep = currentPath.length - 1;
-                    pauseAnimation();
-                }
-                animateStep(animationState.currentStep);
-                if (storedCameraState) {
-                    Plotly.relayout(plotDiv, {'scene.camera': storedCameraState});
-                }
-            }, delay);
+			const delay = 1000 / animationState.speed;
+			animationState.intervalId = setInterval(() => {
+				animationState.currentStep++;
+				if (animationState.currentStep >= currentPath.length) {
+					animationState.currentStep = currentPath.length - 1;
+					pauseAnimation();
+				}
+				animateStep(animationState.currentStep);
+			}, delay);
         }
 
         function pauseAnimation() {
@@ -596,6 +621,19 @@
                  animateStep(animationState.currentStep);
              });
         }
+		
+		function setupCameraChangeListener() {
+			// Listen for camera changes by the user
+			plotDiv.on('plotly_relayout', function(eventData) {
+				// Check if the event data includes camera information
+				if (eventData['scene.camera'] || eventData['scene.camera.eye']) {
+					// Update our stored camera state with the new user-defined camera position
+					storedCameraState = eventData['scene.camera'] || 
+									   (plotDiv._fullLayout && plotDiv._fullLayout.scene ? 
+										plotDiv._fullLayout.scene.camera : null);
+				}
+			});
+		}
 
         // --- Initialization ---
         document.addEventListener('DOMContentLoaded', () => {
