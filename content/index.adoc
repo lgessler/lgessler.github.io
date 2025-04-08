@@ -8,22 +8,20 @@ image::static/luke.jpg[alt="Luke Gessler", role="profile-image", width=160, heig
 Hi, I'm Luke!
 I'm an assistant professor at https://linguistics.indiana.edu/index.html[Indiana University's Department of Linguistics], with adjunct appointments in https://cs.indiana.edu/index.html[Computer Science] and https://melc.indiana.edu/[Middle Eastern Languages and Cultures].
 Previously, I was a postdoc in the https://nala-cub.github.io/[NALA Group] at CU Boulder, and I got my Ph.D. in computational linguistics at https://linguistics.georgetown.edu[Georgetown University] with the https://gucorpling.org/corpling/[Corpling lab] and https://nert.georgetown.edu/[NERT].
-
 I am interested in low-resource NLP and language resource development, particularly in the context of endangered language documentation.
-Linguists are https://specgram.com/CLXXV.1/03.carlson.cartoon5.html[often asked] how many languages they speak, so let me share that mine include English (native), Latin (reading), Hindi-Urdu (conversational), Sahidic Coptic (reading), and bits and pieces of others.
 
 == Research
 
-Modern methods in natural language processing (NLP) are powerful but require great amounts of data.
+Modern natural language processing (NLP) models are powerful but require vast amounts of data.
 This has led to a performance gap between a handful of high-resource languages which have enough data to fully exploit models' capabilities (like Russian or English), and low-resource languages (like Mohawk or Uyghur), which lack the data volume required to fully realize models' potential.
-This is a regrettable circumstance, as poorer performing models may induce many inequities (such as socioeconomic ones), and most of the world's languages may not be spoken by the close of the century and are in need of high-quality language technologies to aid efforts to document and revitalize them.
+This is regrettable, as poorer performing models may induce many inequities (such as socioeconomic ones), and most of the world's languages may not be spoken by the close of the century and are in need of high-quality language technologies to aid efforts to document and revitalize them.
 
-My work is broadly aimed at addressing this performance gap between high- and low-resource languages by developing linguistically-sophisticated resources and algorithms which can help low-resource languages overcome the onerous demands of the deep learning methods which have become dominant in NLP.
+My work is broadly aimed at addressing this performance gap between high- and low-resource languages by developing linguistically-informed resources and algorithms which can help low-resource languages overcome the onerous demands of the deep learning methods which have become dominant in NLP.
 Most of my work can be seen as belonging to at least one of the three following threads:
 
 * Language resource development: creation and maintenance of natural language corpora enriched with linguistic analyses.
-* NLP-capable language documentation systems: developing systems aimed at language documentation, i.e. the process of collecting and describing data in a particular language, with an emphasis on deep integration with NLP systems to facilitate the documentary process.
 * Low-resource NLP: development of methods specifically for languages with little data.
+* NLP-capable language documentation systems: developing systems aimed at language documentation, i.e. the process of collecting and describing data in a particular language, with an emphasis on deep integration with NLP systems to facilitate the documentary process.
 
 == Online
 
