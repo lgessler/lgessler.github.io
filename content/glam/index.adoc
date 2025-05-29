@@ -1,0 +1,6 @@
+= Glam
+:date: 2025-05-29
+:modified: 2025-05-29
+:summary: Glam
+
+Glam is now Plaid! See https://github.com/larc-iu/plaid[Plaid].
