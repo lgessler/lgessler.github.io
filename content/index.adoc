@@ -6,7 +6,7 @@
 image::static/luke.jpg[alt="Luke Gessler", role="profile-image", width=160, height=160]
 
 Hi, I'm Luke!
-I'm an assistant professor at https://linguistics.indiana.edu/index.html[Indiana University's Department of Linguistics], with adjunct appointments in https://cs.indiana.edu/index.html[Computer Science] and https://melc.indiana.edu/[Middle Eastern Languages and Cultures].
+I'm an assistant professor at https://linguistics.indiana.edu/index.html[Indiana University's Department of Linguistics], with adjunct appointments in https://cs.indiana.edu/index.html[the Department of Computer Science], https://cogs.indiana.edu/index.html[the Cognitive Science Program], and https://melc.indiana.edu/[the Department of Middle Eastern Languages and Cultures].
 Previously, I was a postdoc in the https://nala-cub.github.io/[NALA Group] at CU Boulder, and I got my Ph.D. in computational linguistics at https://linguistics.georgetown.edu[Georgetown University] with the https://gucorpling.org/corpling/[Corpling lab] and https://nert.georgetown.edu/[NERT].
 I am interested in low-resource NLP and language resource development, particularly in the context of endangered language documentation.
 
