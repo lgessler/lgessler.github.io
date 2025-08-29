@@ -1,7 +1,7 @@
-= Luke Gessler
+= About
 :date: 2023-06-01
 :modified: 2025-03-09
-:summary: Personal website of Luke Gessler
+:summary: Luke Gessler
 
 image::static/luke.jpg[alt="Luke Gessler", role="profile-image", width=160, height=160]
 
@@ -22,21 +22,3 @@ Most of my work can be seen as belonging to at least one of the three following 
 * Language resource development: creation and maintenance of natural language corpora enriched with linguistic analyses.
 * Low-resource NLP: development of methods specifically for languages with little data.
 * NLP-capable language documentation systems: developing systems aimed at language documentation, i.e. the process of collecting and describing data in a particular language, with an emphasis on deep integration with NLP systems to facilitate the documentary process.
-
-== Online
-
-Here is my...
-
-* Email: lukegessler@gmail.com
-* https://github.com/lgessler[GitHub]
-* https://twitter.com/LukeGessler[Twitter]
-* https://aclanthology.org/people/l/luke-gessler/[ACL Anthology page]
-* https://scholar.google.com/citations?user=ppYCkqgAAAAJ&hl=en[Google Scholar page]
-* https://news.ycombinator.com/user?id=lgessler[Hacker News account]
-
-Also, I'm webmaster of the https://langdoc.net/[langdoc.net] discussion forum, a place for anyone interested in language documentation and language technology.
-Come join us!
-
-== Publications
-
-bibliography::publications.bib[]

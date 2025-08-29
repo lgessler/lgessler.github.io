@@ -21,10 +21,26 @@
     {% block extra_head %}{% endblock %}
 </head>
 <body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="navbar-brand">
+                    <h1><a href="{{ SITEURL }}/">{{ SITENAME }}</a></h1>
+                </div>
+                <ul class="navbar-nav">
+                    {% for title, link in MENUITEMS %}
+                        <li class="nav-item">
+                            <a class="nav-link{% if page and page.url == link %} active{% endif %}" href="{{ SITEURL }}{{ link }}">{{ title }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </nav>
+    </header>
+
     <div id="content" class="container">
         <div class="row">
             <div class="col-md-12">
-                <!-- <h1 class="title">{{ SITENAME }}</h1> -->
                 {% block content %}{% endblock %}
             </div>
         </div>

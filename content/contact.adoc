@@ -1,0 +1,22 @@
+= Contact
+:summary: Luke Gessler | Contact
+
+== Contacting Me
+
+You can email me at `lgessler@iu.edu`.
+I do my best to respond to all messages that were sent to me personally.
+If I don't respond for a few days, please don't hesitate to follow up.
+I appreciate the reminder!
+
+== Online
+
+I'm around on many places on the internet. See:
+
+* https://github.com/lgessler[GitHub]
+* https://twitter.com/LukeGessler[Twitter]
+* https://aclanthology.org/people/l/luke-gessler/[ACL Anthology page]
+* https://scholar.google.com/citations?user=ppYCkqgAAAAJ&hl=en[Google Scholar page]
+* https://news.ycombinator.com/user?id=lgessler[Hacker News account]
+
+Also, I'm webmaster of the https://langdoc.net/[langdoc.net] discussion forum, a place for anyone interested in language documentation and language technology.
+Come join us!

@@ -39,6 +39,17 @@ ASCIIDOC_BACKEND = 'html5'
 # Turn off default templates (including index)
 DIRECT_TEMPLATES = []
 
+# Enable pages in menu
+DISPLAY_PAGES_ON_MENU = True
+
+# Custom menu configuration
+MENUITEMS = (
+    ('About', '/index.html'),
+    ('Research', '/research.html'),  
+    ('Teaching', '/teaching.html'),
+    ('Contact', '/contact.html'),
+)
+
 # Disable categories and tags
 CATEGORY_SAVE_AS = ''
 AUTHOR_SAVE_AS = ''

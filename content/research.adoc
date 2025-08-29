@@ -1,0 +1,8 @@
+= Publications
+:summary: Luke Gessler | Publications
+
+This is a list of most of my publications.
+
+== Publications
+
+bibliography::publications.bib[]
