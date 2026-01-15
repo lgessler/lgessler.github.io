@@ -1,4 +1,40 @@
 = Teaching
 :summary: Luke Gessler | Teaching
 
-_Coming soon_
+At Indiana University Bloomington, I teach several courses at the undergraduate and graduate levels:
+
+**LING-L 245: Language and Computers**::
+Computer systems that process human language have become ubiquitous in modern life.
+This course surveys modern language technologies, which may include writing systems, writing assistants, language learning assistants, text classifiers, search engines, machine translation systems, and large language models such as ChatGPT.
+For the technologies covered, we explore how they function, emphasizing insights from linguistics, and discuss the ethical and social consequences of their use. No technical background is assumed.
++
+Offered: Spring 2026
+
+**LING-L 605: Advanced Data Modeling for Computational Linguistics**::
+In this course, students will develop their practical programming skills in Python while gaining familiarity with algorithms and data structures that are foundational for computational linguistics.
+Topics covered include linked lists, queues and stacks, tree-based data structures, tree-based algorithms, sorting algorithms, graphs, and search algorithms.
++
+Offered: Spring 2026
+
+**LING-L 235 / LING-L 555: Foundational Skills in Computational Linguistics / Programming for Computational Linguistics**::
+This course is geared towards students in Computational Linguistics and Linguistics, with little or no experience in programming.
+It introduces the fundamentals of programming and computer science, aiming at attaining practical skills for text processing.
+In contrast to similar courses in Computer Science, we will concentrate on problems in Computational Linguistics, which involve managing text, searching in text, and extracting information from text.
++
+Offered: Fall 2025, Fall 2024
+
+**LING-L 665: Applying Machine Learning Techniques in Computational Linguistics**::
+An introduction to machine learning (ML) methods for computational linguistics (CL).
+We begin by covering basic concepts in ML before turning to foundational ML methods in CL.
+Throughout, students develop practical skills in ML programming in Python, relying on libraries such as NumPy, PyTorch, and scikit-learn.
+Students will develop an understanding of the mathematical details underlying modern models used in CL, and will have practical skills for creating and using ML models for CL.
++
+Offered: Fall 2025, Spring 2025
+
+**LING-L 715: Large Language Models**::
+Large language models (LLMs) have dominated the attention of researchers in natural language processing and computational linguistics since the landmark releases of BERT (2018) and ChatGPT (2022).
+In this seminar, we broadly survey recent work on LLMs, covering their technical foundations, interpretation, applications, and ethical and philosophical considerations.
+Students will spend the bulk of their time working on a project of their choosing related to LLMs.
+By the end of the course, students will have an understanding of both the inner workings of LLMs and their broader significance in academia and society.
++
+Offered: Spring 2025
