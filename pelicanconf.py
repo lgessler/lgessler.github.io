@@ -48,6 +48,7 @@ MENUITEMS = (
     ('Research', '/research.html'),  
     ('Teaching', '/teaching.html'),
     ('Contact', '/contact.html'),
+    ('LARC Group', 'https://larc-iu.github.io/'),
 )
 
 # Disable categories and tags

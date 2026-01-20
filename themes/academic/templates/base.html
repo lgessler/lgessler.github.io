@@ -30,7 +30,10 @@
                 <ul class="navbar-nav">
                     {% for title, link in MENUITEMS %}
                         <li class="nav-item">
-                            <a class="nav-link{% if page and page.url == link %} active{% endif %}" href="{{ SITEURL }}{{ link }}">{{ title }}</a>
+                            <a class="nav-link{% if page and page.url == link %} active{% endif %}" 
+                               href="{% if link[:4] == "http" %}{% else %}{{ SITEURL}}{% endif %}{{ link }}">
+                              {{ title }}
+                            </a>
                         </li>
                     {% endfor %}
                 </ul>
