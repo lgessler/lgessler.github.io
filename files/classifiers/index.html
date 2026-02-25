@@ -57,7 +57,7 @@
         <span class="tooltip-icon" data-tip="Predict AI if log-odds ≥ threshold. Raising the threshold requires stronger AI evidence: sensitivity drops, specificity rises.">?</span>
       </h2>
       <div class="control-group">
-        <label>Log-odds threshold <span class="value-display" id="nb-thresh-val">0.00</span></label>
+        <label>Log-odds threshold <input type="text" class="thresh-input" id="nb-thresh-val" value="0.00" /></label>
         <input type="range" id="nb-thresh" min="0" max="8" step="1" value="4" disabled />
         <small class="hint">9 steps · −2.0 → 2.0 · default 0.0</small>
       </div>
@@ -230,7 +230,7 @@
         <span class="tooltip-icon" data-tip="Predict AI if score ≥ threshold. Moving right requires a stronger AI signal before predicting AI.">?</span>
       </h2>
       <div class="control-group">
-        <label>Score threshold <span class="value-display" id="perc-thresh-val">0.00</span></label>
+        <label>Score threshold <input type="text" class="thresh-input" id="perc-thresh-val" value="0.00" /></label>
         <input type="range" id="perc-thresh" min="0" max="12" step="1" value="6" disabled />
         <small class="hint">13 steps · −3.0 → 3.0 · default 0.00</small>
       </div>

@@ -845,22 +845,44 @@ function bindSliders() {
   const nbThreshVal = document.getElementById('nb-thresh-val');
   nbThresh.addEventListener('input', () => {
     const v = NB_THRESH_VALUES[+nbThresh.value];
-    nbThreshVal.textContent = v.toFixed(2);
+    nbThreshVal.value = v.toFixed(2);
     state.nb.threshold = v;
     onThresholdChange('nb');
   });
-  nbThreshVal.textContent = NB_THRESH_VALUES[+nbThresh.value].toFixed(2);
+  nbThreshVal.value = NB_THRESH_VALUES[+nbThresh.value].toFixed(2);
+  nbThreshVal.addEventListener('keydown', e => { if (e.key === 'Enter') nbThreshVal.blur(); });
+  nbThreshVal.addEventListener('blur', () => {
+    const parsed = parseFloat(nbThreshVal.value);
+    if (!isFinite(parsed)) {
+      nbThreshVal.value = state.nb.threshold.toFixed(2);
+      return;
+    }
+    state.nb.threshold = parsed;
+    nbThreshVal.value = parsed.toFixed(2);
+    onThresholdChange('nb');
+  });
 
   // Perceptron threshold
   const percThresh = document.getElementById('perc-thresh');
   const percThreshVal = document.getElementById('perc-thresh-val');
   percThresh.addEventListener('input', () => {
     const v = PERC_THRESH_VALUES[+percThresh.value];
-    percThreshVal.textContent = v.toFixed(2);
+    percThreshVal.value = v.toFixed(2);
     state.perc.threshold = v;
     onThresholdChange('perc');
   });
-  percThreshVal.textContent = PERC_THRESH_VALUES[+percThresh.value].toFixed(2);
+  percThreshVal.value = PERC_THRESH_VALUES[+percThresh.value].toFixed(2);
+  percThreshVal.addEventListener('keydown', e => { if (e.key === 'Enter') percThreshVal.blur(); });
+  percThreshVal.addEventListener('blur', () => {
+    const parsed = parseFloat(percThreshVal.value);
+    if (!isFinite(parsed)) {
+      percThreshVal.value = state.perc.threshold.toFixed(2);
+      return;
+    }
+    state.perc.threshold = parsed;
+    percThreshVal.value = parsed.toFixed(2);
+    onThresholdChange('perc');
+  });
 }
 
 // ── Live inference ────────────────────────────────────────────────
