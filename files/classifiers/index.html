@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Text Classification Explorer — LING-L 245</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+<header>
+  <h1>Text Classification Explorer</h1>
+</header>
+
+<nav id="tab-bar">
+  <button class="tab-btn active" data-tab="nb">Naive Bayes</button>
+  <button class="tab-btn"        data-tab="perc">Perceptron</button>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════
+     NAIVE BAYES TAB
+═══════════════════════════════════════════════════════ -->
+<section id="tab-nb" class="tab-panel active">
+
+  <aside class="controls-panel">
+    <div class="card">
+      <h2>Training Controls</h2>
+
+      <div class="control-group">
+        <label>
+          Training set size
+          <span class="tooltip-icon" data-tip="How many Reddit examples the model trains on.">?</span>
+          <span class="value-display" id="nb-train-size-val">800</span>
+        </label>
+        <input type="range" id="nb-train-size" min="100" max="2000" step="100" value="800" />
+      </div>
+
+      <div class="control-group">
+        <label>
+          Feature mode
+          <span class="tooltip-icon" data-tip="Bigram mode uses both unigrams and bigrams.">?</span>
+        </label>
+        <div class="radio-group">
+          <label><input type="radio" name="nb-feat" value="unigram" checked /> Unigram</label>
+          <label><input type="radio" name="nb-feat" value="bigram" /> Bigram</label>
+        </div>
+      </div>
+
+      <button class="btn-train" id="nb-train-btn">Train &amp; Evaluate</button>
+      <div class="status-bar" id="nb-status"></div>
+    </div>
+
+    <div class="card">
+      <h2>
+        Decision Threshold
+        <span class="tooltip-icon" data-tip="Predict AI if log-odds ≥ threshold. Raising the threshold requires stronger AI evidence: sensitivity drops, specificity rises.">?</span>
+      </h2>
+      <div class="control-group">
+        <label>Log-odds threshold <span class="value-display" id="nb-thresh-val">0.00</span></label>
+        <input type="range" id="nb-thresh" min="0" max="8" step="1" value="4" disabled />
+        <small class="hint">9 steps · −2.0 → 2.0 · default 0.0</small>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>How it works:</strong> Naive Bayes computes log P(class | words) by summing log-likelihoods of each word given each class. The class with the higher log-probability wins.
+    </div>
+  </aside>
+
+  <!-- Inner pane -->
+  <div class="inner-pane">
+    <nav class="inner-tab-bar">
+      <button class="inner-tab-btn active" data-for="nb" data-panel="overview">Overview</button>
+      <button class="inner-tab-btn"        data-for="nb" data-panel="examples">Examples</button>
+      <button class="inner-tab-btn"        data-for="nb" data-panel="weights">Word Weights</button>
+      <button class="inner-tab-btn"        data-for="nb" data-panel="inference">Inference</button>
+    </nav>
+
+    <!-- Overview -->
+    <div id="nb-panel-overview" class="inner-panel active">
+      <div class="overview-row">
+        <div class="card metrics-card">
+          <h2>Metrics</h2>
+          <div id="nb-accuracy-display" class="placeholder-text">Train the model to see results.</div>
+        </div>
+        <div class="card chart-card">
+          <h2>
+            Top Discriminative Words
+            <span class="tooltip-icon" style="margin-left:6px" data-tip="Bars show log-odds. Odds > 1 → AI signal (blue); odds < 1 → Human signal (red).">?</span>
+          </h2>
+          <div id="nb-topwords-placeholder" class="placeholder-text">Train the model to see top words.</div>
+          <canvas id="nb-topwords-chart" style="display:none"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Examples -->
+    <div id="nb-panel-examples" class="inner-panel">
+      <div class="card examples-card">
+        <div id="nb-ngram-banner" class="ngram-banner" style="display:none">
+          <span>Documents containing <span class="ngram-chip" id="nb-ngram-chip"></span></span>
+          <button class="ngram-clear" data-prefix="nb">&#10005; Clear</button>
+        </div>
+        <div class="filter-bar">
+          <button class="filter-btn active" data-model="nb" data-filter="all">All test items</button>
+          <button class="filter-btn" data-model="nb" data-filter="correct">Correct</button>
+          <button class="filter-btn" data-model="nb" data-filter="wrong">Wrong</button>
+          <button class="filter-btn" data-model="nb" data-filter="conf-correct">Most Confident Correct</button>
+          <button class="filter-btn" data-model="nb" data-filter="conf-wrong">Most Confident Wrong</button>
+        </div>
+        <div id="nb-examples-meta" class="examples-meta"></div>
+        <div id="nb-examples-placeholder" class="placeholder-text">Train the model to see examples.</div>
+        <div class="examples-table-wrap" id="nb-examples-wrap" style="display:none">
+          <table class="examples-table">
+            <thead>
+              <tr>
+                <th class="col-num">#</th>
+                <th class="col-text">Text</th>
+                <th class="col-label">True</th>
+                <th class="col-label">Predicted</th>
+                <th class="col-score" id="nb-score-hdr">Odds</th>
+                <th class="col-check"></th>
+              </tr>
+            </thead>
+            <tbody id="nb-examples-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Word Weights -->
+    <div id="nb-panel-weights" class="inner-panel">
+      <div class="card weights-card">
+        <div class="weights-controls">
+          <input type="text" id="nb-weights-search" class="weights-search" placeholder="Filter words…" disabled />
+          <div class="dir-toggle">
+            <button class="dir-btn active" data-prefix="nb" data-dir="all">All</button>
+            <button class="dir-btn" data-prefix="nb" data-dir="ai">AI-leaning</button>
+            <button class="dir-btn" data-prefix="nb" data-dir="human">Human-leaning</button>
+          </div>
+        </div>
+        <div id="nb-weights-meta" class="weights-meta"></div>
+        <div id="nb-weights-placeholder" class="placeholder-text">Train the model to see word weights.</div>
+        <div class="weights-table-wrap" id="nb-weights-wrap" style="display:none">
+          <table class="weights-table">
+            <thead>
+              <tr>
+                <th class="wt-rank">#</th>
+                <th class="wt-word">Word / Feature</th>
+                <th class="wt-score" id="nb-weights-score-hdr">Log-odds</th>
+                <th class="wt-bar"></th>
+              </tr>
+            </thead>
+            <tbody id="nb-weights-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Inference -->
+    <div id="nb-panel-inference" class="inner-panel">
+      <div class="card inference-card">
+        <h2>Live Inference</h2>
+        <textarea id="nb-infer-text" placeholder="Paste or type any text here to classify it…" disabled></textarea>
+        <button class="btn-classify" id="nb-infer-btn" disabled>Classify</button>
+        <div id="nb-infer-result"></div>
+      </div>
+    </div>
+  </div><!-- /inner-pane -->
+
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     PERCEPTRON TAB
+═══════════════════════════════════════════════════════ -->
+<section id="tab-perc" class="tab-panel">
+
+  <aside class="controls-panel">
+    <div class="card">
+      <h2>Training Controls</h2>
+
+      <div class="control-group">
+        <label>
+          Training set size
+          <span class="tooltip-icon" data-tip="How many Reddit examples the model trains on.">?</span>
+          <span class="value-display" id="perc-train-size-val">800</span>
+        </label>
+        <input type="range" id="perc-train-size" min="100" max="2000" step="100" value="800" />
+      </div>
+
+      <div class="control-group">
+        <label>
+          Epochs
+          <span class="tooltip-icon" data-tip="One epoch = one full pass through training data.">?</span>
+          <span class="value-display" id="perc-epochs-val">5</span>
+        </label>
+        <input type="range" id="perc-epochs" min="1" max="20" step="1" value="5" />
+      </div>
+
+      <div class="control-group">
+        <label>
+          Learning rate
+          <span class="tooltip-icon" data-tip="How much to adjust weights at each step.">?</span>
+          <span class="value-display" id="perc-lr-val">0.100</span>
+        </label>
+        <input type="range" id="perc-lr" min="0" max="100" step="1" value="50" />
+        <small class="hint">Log scale: 0.001 → 1.0</small>
+      </div>
+
+      <div class="control-group">
+        <label>
+          Feature mode
+          <span class="tooltip-icon" data-tip="Bigram mode uses both unigrams and bigrams.">?</span>
+        </label>
+        <div class="radio-group">
+          <label><input type="radio" name="perc-feat" value="unigram" checked /> Unigram</label>
+          <label><input type="radio" name="perc-feat" value="bigram" /> Bigram</label>
+        </div>
+      </div>
+
+      <button class="btn-train" id="perc-train-btn">Train &amp; Evaluate</button>
+      <div class="status-bar" id="perc-status"></div>
+    </div>
+
+    <div class="card">
+      <h2>
+        Decision Threshold
+        <span class="tooltip-icon" data-tip="Predict AI if score ≥ threshold. Moving right requires a stronger AI signal before predicting AI.">?</span>
+      </h2>
+      <div class="control-group">
+        <label>Score threshold <span class="value-display" id="perc-thresh-val">0.00</span></label>
+        <input type="range" id="perc-thresh" min="0" max="12" step="1" value="6" disabled />
+        <small class="hint">13 steps · −3.0 → 3.0 · default 0.00</small>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>How it works:</strong> The Perceptron updates weights whenever it misclassifies an example: promote features of the correct class, demote features of the wrong class.
+    </div>
+  </aside>
+
+  <!-- Inner pane -->
+  <div class="inner-pane">
+    <nav class="inner-tab-bar">
+      <button class="inner-tab-btn active" data-for="perc" data-panel="overview">Overview</button>
+      <button class="inner-tab-btn"        data-for="perc" data-panel="curve">Learning Curve</button>
+      <button class="inner-tab-btn"        data-for="perc" data-panel="examples">Examples</button>
+      <button class="inner-tab-btn"        data-for="perc" data-panel="weights">Word Weights</button>
+      <button class="inner-tab-btn"        data-for="perc" data-panel="inference">Inference</button>
+    </nav>
+
+    <!-- Overview -->
+    <div id="perc-panel-overview" class="inner-panel active">
+      <div class="overview-row">
+        <div class="card metrics-card">
+          <h2>Metrics</h2>
+          <div id="perc-accuracy-display" class="placeholder-text">Train the model to see results.</div>
+        </div>
+        <div class="card chart-card">
+          <h2>
+            Top Weighted Words
+            <span class="tooltip-icon" style="margin-left:6px" data-tip="Positive weight → AI signal (blue); negative weight → Human signal (red).">?</span>
+          </h2>
+          <div id="perc-topwords-placeholder" class="placeholder-text">Train the model to see top words.</div>
+          <canvas id="perc-topwords-chart" style="display:none"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Curve -->
+    <div id="perc-panel-curve" class="inner-panel">
+      <div class="card">
+        <h2>Training Accuracy per Epoch</h2>
+        <div id="perc-epoch-placeholder" class="placeholder-text">Train the model to see the learning curve.</div>
+        <canvas id="perc-epoch-chart" style="display:none; max-height:280px"></canvas>
+      </div>
+    </div>
+
+    <!-- Examples -->
+    <div id="perc-panel-examples" class="inner-panel">
+      <div class="card examples-card">
+        <div id="perc-ngram-banner" class="ngram-banner" style="display:none">
+          <span>Documents containing <span class="ngram-chip" id="perc-ngram-chip"></span></span>
+          <button class="ngram-clear" data-prefix="perc">&#10005; Clear</button>
+        </div>
+        <div class="filter-bar">
+          <button class="filter-btn active" data-model="perc" data-filter="all">All test items</button>
+          <button class="filter-btn" data-model="perc" data-filter="correct">Correct</button>
+          <button class="filter-btn" data-model="perc" data-filter="wrong">Wrong</button>
+          <button class="filter-btn" data-model="perc" data-filter="conf-correct">Most Confident Correct</button>
+          <button class="filter-btn" data-model="perc" data-filter="conf-wrong">Most Confident Wrong</button>
+        </div>
+        <div id="perc-examples-meta" class="examples-meta"></div>
+        <div id="perc-examples-placeholder" class="placeholder-text">Train the model to see examples.</div>
+        <div class="examples-table-wrap" id="perc-examples-wrap" style="display:none">
+          <table class="examples-table">
+            <thead>
+              <tr>
+                <th class="col-num">#</th>
+                <th class="col-text">Text</th>
+                <th class="col-label">True</th>
+                <th class="col-label">Predicted</th>
+                <th class="col-score" id="perc-score-hdr">Score</th>
+                <th class="col-check"></th>
+              </tr>
+            </thead>
+            <tbody id="perc-examples-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Word Weights -->
+    <div id="perc-panel-weights" class="inner-panel">
+      <div class="card weights-card">
+        <div class="weights-controls">
+          <input type="text" id="perc-weights-search" class="weights-search" placeholder="Filter words…" disabled />
+          <div class="dir-toggle">
+            <button class="dir-btn active" data-prefix="perc" data-dir="all">All</button>
+            <button class="dir-btn" data-prefix="perc" data-dir="ai">AI-leaning</button>
+            <button class="dir-btn" data-prefix="perc" data-dir="human">Human-leaning</button>
+          </div>
+        </div>
+        <div id="perc-weights-meta" class="weights-meta"></div>
+        <div id="perc-weights-placeholder" class="placeholder-text">Train the model to see word weights.</div>
+        <div class="weights-table-wrap" id="perc-weights-wrap" style="display:none">
+          <table class="weights-table">
+            <thead>
+              <tr>
+                <th class="wt-rank">#</th>
+                <th class="wt-word">Word / Feature</th>
+                <th class="wt-score" id="perc-weights-score-hdr">Weight</th>
+                <th class="wt-bar"></th>
+              </tr>
+            </thead>
+            <tbody id="perc-weights-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Inference -->
+    <div id="perc-panel-inference" class="inner-panel">
+      <div class="card inference-card">
+        <h2>Live Inference</h2>
+        <textarea id="perc-infer-text" placeholder="Paste or type any text here to classify it…" disabled></textarea>
+        <button class="btn-classify" id="perc-infer-btn" disabled>Classify</button>
+        <div id="perc-infer-result"></div>
+      </div>
+    </div>
+  </div><!-- /inner-pane -->
+
+</section>
+
+<script src="app.js"></script>
+</body>
+</html>
