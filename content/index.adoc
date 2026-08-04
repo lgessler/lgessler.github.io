@@ -13,19 +13,15 @@ I am interested in low-resource NLP and language resource development, particula
 <nav class="cta-grid" aria-label="Site sections">
   <a class="cta-card cta-featured" href="https://larc-iu.github.io/">
     <span class="cta-title">LARC Group <span class="cta-ext" aria-hidden="true">&#8599;</span></span>
-    <span class="cta-desc">My lab &mdash; Linguistic Algorithms, Resources, and Conservation. Algorithms and resources for low-resource and endangered languages.</span>
   </a>
   <a class="cta-card" href="research.html">
     <span class="cta-title">Research</span>
-    <span class="cta-desc">Publications on low-resource NLP, language resources, and language documentation.</span>
   </a>
   <a class="cta-card" href="teaching.html">
     <span class="cta-title">Teaching</span>
-    <span class="cta-desc">Courses I teach at Indiana University, from intro programming to LLM seminars.</span>
   </a>
   <a class="cta-card" href="contact.html">
     <span class="cta-title">Contact</span>
-    <span class="cta-desc">How to reach me, and where to find me elsewhere on the internet.</span>
   </a>
 </nav>
 ++++

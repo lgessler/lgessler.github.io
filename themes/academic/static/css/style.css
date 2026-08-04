@@ -92,12 +92,13 @@ a:hover, a:focus {
 
 .cta-card {
   display: flex;
-  flex-direction: column;
-  gap: 7px;
-  padding: 20px 22px;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 22px;
   border: 1px solid #e4e4e4;
   border-radius: 10px;
   text-decoration: none;
+  text-align: center;
   transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
 }
 
@@ -115,19 +116,13 @@ a:hover, a:focus {
 }
 
 .cta-title {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 500;
   color: var(--link-color);
 }
 
 .cta-ext {
   font-size: 0.85em;
-}
-
-.cta-desc {
-  font-size: 0.92rem;
-  line-height: 1.45;
-  color: #666;
 }
 
 @media (max-width: 600px) {
