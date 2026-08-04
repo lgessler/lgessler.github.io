@@ -9,23 +9,10 @@ I am an assistant professor at https://linguistics.indiana.edu/index.html[Indian
 Previously, I was a postdoc in the https://nala-cub.github.io/[NALA Group] at CU Boulder, and I got my Ph.D. in computational linguistics at https://linguistics.georgetown.edu[Georgetown University] with the https://gucorpling.org/corpling/[Corpling lab] and https://nert.georgetown.edu/[NERT].
 I am interested in low-resource NLP and language resource development, particularly in the context of endangered language documentation.
 
-++++
-<nav class="cta-grid" aria-label="Site sections">
-  <a class="cta-card cta-featured" href="https://larc-iu.github.io/">
-    <span class="cta-title">LARC Group <span class="cta-ext" aria-hidden="true">&#8599;</span></span>
-  </a>
-  <a class="cta-card" href="research.html">
-    <span class="cta-title">Research</span>
-  </a>
-  <a class="cta-card" href="teaching.html">
-    <span class="cta-title">Teaching</span>
-  </a>
-  <a class="cta-card" href="cv.pdf">
-    <span class="cta-title">CV <span class="cta-ext" aria-hidden="true">(PDF)</span></span>
-  </a>
-  <a class="cta-card" href="contact.html">
-    <span class="cta-title">Contact</span>
-  </a>
-</nav>
-++++
+[role="cta-list"]
+* https://larc-iu.github.io/[LARC Group ↗]
+* link:research.html[Research]
+* link:teaching.html[Teaching]
+* link:cv.pdf[CV (PDF)]
+* link:contact.html[Contact]
 
