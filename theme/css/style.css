@@ -133,6 +133,14 @@ header {
   margin: 0;
 }
 
+/* Marks a nav item that leaves the site. Added by the template to any
+   MENUITEMS entry whose link is absolute. */
+.nav-ext {
+  font-size: 0.8em;
+  margin-left: 2px;
+  vertical-align: baseline;
+}
+
 .nav-link {
   color: var(--main-text-color);
   text-decoration: none;
