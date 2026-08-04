@@ -44,7 +44,7 @@ DISPLAY_PAGES_ON_MENU = True
 
 # Custom menu configuration
 MENUITEMS = (
-    ('LARC Group', 'https://larc-iu.github.io/'),
+    ('LARC Lab', 'https://larc-iu.github.io/'),
     ('Research', '/research.html'),
     ('Teaching', '/teaching.html'),
     ('Contact', '/contact.html'),

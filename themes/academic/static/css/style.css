@@ -81,51 +81,6 @@ a:hover, a:focus {
   box-shadow: 0 3px 10px rgba(0,0,0,0.1); /* Optional: adds a subtle shadow */
 }
 
-/* Home page section links: one pill per row, each sized to its label.
-   Markup comes from a plain AsciiDoc list carrying role="cta-list". */
-.cta-list {
-  clear: both; /* drop below the floated profile image */
-  margin: 2em 0 1em;
-}
-
-.cta-list ul {
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
-}
-
-.cta-list li {
-  margin-bottom: 10px;
-}
-
-.cta-list a {
-  display: inline-block;
-  padding: 10px 22px;
-  border: 1px solid #dcdcdc;
-  border-radius: 999px;
-  font-size: 1.05rem;
-  font-weight: 500;
-  text-decoration: none;
-  transition: border-color 0.15s ease, background-color 0.15s ease;
-}
-
-.cta-list a:hover, .cta-list a:focus {
-  border-color: var(--link-color);
-  background-color: #f5f9fc;
-  text-decoration: none;
-}
-
-/* The lab leads, so it carries the accent. */
-.cta-list li:first-child a {
-  border-color: #bcd6ea;
-  background-color: #f5f9fc;
-}
-
-.cta-list li:first-child a:hover,
-.cta-list li:first-child a:focus {
-  border-color: var(--link-color);
-}
-
 /* Navigation */
 header {
   background-color: var(--body-bg);
@@ -176,6 +131,14 @@ header {
 
 .nav-item {
   margin: 0;
+}
+
+/* Marks a nav item that leaves the site. Added by the template to any
+   MENUITEMS entry whose link is absolute. */
+.nav-ext {
+  font-size: 0.8em;
+  margin-left: 2px;
+  vertical-align: baseline;
 }
 
 .nav-link {

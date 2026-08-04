@@ -27,9 +27,9 @@
                 <ul class="navbar-nav">
                     {% for title, link in MENUITEMS %}
                         <li class="nav-item">
-                            <a class="nav-link{% if page and page.url == link %} active{% endif %}" 
+                            <a class="nav-link{% if page and page.url == link %} active{% endif %}"
                                href="{% if link[:4] == "http" %}{% else %}{{ SITEURL}}{% endif %}{{ link }}">
-                              {{ title }}
+                              {{ title }}{% if link[:4] == "http" %}<span class="nav-ext" aria-hidden="true">&#8599;</span>{% endif %}
                             </a>
                         </li>
                     {% endfor %}
