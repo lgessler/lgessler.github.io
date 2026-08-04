@@ -81,6 +81,61 @@ a:hover, a:focus {
   box-shadow: 0 3px 10px rgba(0,0,0,0.1); /* Optional: adds a subtle shadow */
 }
 
+/* Home page section cards */
+.cta-grid {
+  clear: both; /* drop below the floated profile image */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin: 2.2em 0 1em;
+}
+
+.cta-card {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 20px 22px;
+  border: 1px solid #e4e4e4;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.cta-card:hover, .cta-card:focus {
+  border-color: var(--link-color);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.09);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+/* The lab gets an accent so it reads as the primary destination. */
+.cta-card.cta-featured {
+  border-color: #bcd6ea;
+  background-color: #f5f9fc;
+}
+
+.cta-title {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--link-color);
+}
+
+.cta-ext {
+  font-size: 0.85em;
+}
+
+.cta-desc {
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: #666;
+}
+
+@media (max-width: 600px) {
+  .cta-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Navigation */
 header {
   background-color: var(--body-bg);

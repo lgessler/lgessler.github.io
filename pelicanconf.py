@@ -44,11 +44,10 @@ DISPLAY_PAGES_ON_MENU = True
 
 # Custom menu configuration
 MENUITEMS = (
-    ('About', '/index.html'),
-    ('Research', '/research.html'),  
+    ('LARC Group', 'https://larc-iu.github.io/'),
+    ('Research', '/research.html'),
     ('Teaching', '/teaching.html'),
     ('Contact', '/contact.html'),
-    ('LARC Group', 'https://larc-iu.github.io/'),
 )
 
 # Disable categories and tags
