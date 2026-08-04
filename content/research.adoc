@@ -1,8 +1,7 @@
 = Publications
 :summary: Luke Gessler | Publications
 
-This is a list of most of my publications.
-
-== Publications
+My publications, newest first.
+This list is generated from a single https://github.com/lgessler/lgessler.github.io/blob/master/content/static/publications.bib[BibTeX file] that also produces my CV.
 
 bibliography::publications.bib[]

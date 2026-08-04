@@ -51,3 +51,5 @@ cache/
 
 # Log files
 *.log 
+# Overleaf CV working clone (see bin/sync-cv.sh)
+cv/
