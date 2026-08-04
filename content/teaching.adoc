@@ -3,6 +3,21 @@
 
 At Indiana University Bloomington, I teach several courses at the undergraduate and graduate levels:
 
+**LING-L 715: Linguistic Behavior in Language Models**::
+Large language models (LLMs) are capable of processing natural language fluently.
+In this seminar, we investigate various questions pertaining to this capacity, such as how linguistic knowledge is encoded mechanistically in LLMs, and whether linguistic knowledge in LLMs can be viewed as encoded grammatical analyses and decoded into a human-interpretable form.
+Students will gain experience with engaging with primary research literature and work on a project of their choosing related to the topic.
++
+Offered: Fall 2026
+
+
+**LING-L 235 / LING-L 555: Foundational Skills in Computational Linguistics / Programming for Computational Linguistics**::
+This course is geared towards students in Computational Linguistics and Linguistics, with little or no experience in programming.
+It introduces the fundamentals of programming and computer science, aiming at attaining practical skills for text processing.
+In contrast to similar courses in Computer Science, we will concentrate on problems in Computational Linguistics, which involve managing text, searching in text, and extracting information from text.
++
+Offered: Fall 2026, Fall 2025, Fall 2024
+
 **LING-L 245: Language and Computers**::
 Computer systems that process human language have become ubiquitous in modern life.
 This course surveys modern language technologies, which may include writing systems, writing assistants, language learning assistants, text classifiers, search engines, machine translation systems, and large language models such as ChatGPT.
@@ -15,13 +30,6 @@ In this course, students will develop their practical programming skills in Pyth
 Topics covered include linked lists, queues and stacks, tree-based data structures, tree-based algorithms, sorting algorithms, graphs, and search algorithms.
 +
 Offered: Spring 2026
-
-**LING-L 235 / LING-L 555: Foundational Skills in Computational Linguistics / Programming for Computational Linguistics**::
-This course is geared towards students in Computational Linguistics and Linguistics, with little or no experience in programming.
-It introduces the fundamentals of programming and computer science, aiming at attaining practical skills for text processing.
-In contrast to similar courses in Computer Science, we will concentrate on problems in Computational Linguistics, which involve managing text, searching in text, and extracting information from text.
-+
-Offered: Fall 2025, Fall 2024
 
 **LING-L 665: Applying Machine Learning Techniques in Computational Linguistics**::
 An introduction to machine learning (ML) methods for computational linguistics (CL).
