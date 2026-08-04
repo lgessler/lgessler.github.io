@@ -186,35 +186,79 @@ ol p {
   margin-top: unset;
 }
 
-/* Bibliography styles */
+/* Publication list: year heading, then title / authors / venue per entry. */
 .bibliography {
-  margin-top: 1em;
+  margin-top: 1.5em;
   margin-bottom: 2em;
 }
 
-.bibliography ul {
-  list-style-type: none;
-  padding-left: 0;
+.bibliography .pub-year {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #999;
+  letter-spacing: 0.06em;
+  border: none;
+  padding: 0;
+  margin: 2.2em 0 1.1em;
 }
 
-.bibliography li {
-  margin-bottom: 16px;
-  padding-left: 20px;
-  text-indent: -20px;
+.bibliography .pub-year:first-child {
+  margin-top: 0;
 }
 
-.bibliography a {
-  color: var(--link-color);
-  text-decoration: none;
+.pub {
+  margin-bottom: 1.4em;
 }
 
-.bibliography a:hover, .bibliography a:focus {
-  color: var(--link-hover-color);
+.pub-title {
+  font-size: 1.12rem;
+  line-height: 1.35;
+  margin-bottom: 3px;
+}
+
+.pub-title a {
+  color: var(--main-text-color);
   text-decoration: underline;
+  text-decoration-color: #c8c8c8;
+  text-underline-offset: 3px;
 }
 
-.bibliography em {
-  font-style: italic;
+.pub-title a:hover, .pub-title a:focus {
+  color: var(--link-color);
+  text-decoration-color: var(--link-color);
+}
+
+.pub-authors {
+  color: #767676;
+  line-height: 1.45;
+  margin-bottom: 2px;
+}
+
+/* The site owner, bolded by the renderer, sits darker than co-authors. */
+.pub-authors strong {
+  color: var(--main-text-color);
+  font-weight: 500;
+}
+
+.pub-meta {
+  color: #8c8c8c;
+  font-size: 0.95rem;
+}
+
+.pub-meta a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: #c8c8c8;
+  text-underline-offset: 3px;
+}
+
+.pub-meta a:hover, .pub-meta a:focus {
+  color: var(--link-color);
+  text-decoration-color: var(--link-color);
+}
+
+.pub-award {
+  margin-right: 1px;
 }
 
 /* Footer */

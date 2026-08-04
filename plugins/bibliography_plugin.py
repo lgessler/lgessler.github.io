@@ -2,8 +2,13 @@
 Bibliography plugin for Pelican.
 
 Adds a ``bibliography::<file>.bib[]`` directive to AsciiDoc pages. The named
-file is resolved relative to ``content/static/`` and rendered as a flat,
-reverse-chronological HTML list in roughly ACL Anthology style.
+file is resolved relative to ``content/static/`` and rendered newest-first,
+grouped under year headings, as title / authors / venue blocks.
+
+Three optional fields drive the site rendering and are ignored by LaTeX:
+``venue`` (short label such as ACL or COLING; falls back to the full
+booktitle), ``code`` (repo URL, rendered as a "code" link), and ``award``
+(shows a trophy before the title and the award name after the venue).
 
 This is a pure-Python renderer: it parses the .bib with pybtex and decodes
 LaTeX markup with pylatexenc. It deliberately does NOT shell out to ``bibtex``
@@ -81,84 +86,70 @@ def _format_authors(persons):
     return ', '.join(names[:-1]) + f', and {names[-1]}'
 
 
-def _format_pages(raw):
-    """Normalize page ranges to use an en dash."""
-    pages = latex_to_text(raw)
-    return re.sub(r'(\d)\s*-{1,3}\s*(\d)', r'\1–\2', pages)
-
-
-def _terminate(text):
-    """Append a period unless the text already ends in sentence punctuation."""
-    stripped = re.sub(r'</a>$', '', text).rstrip()
-    if stripped.endswith(('.', '?', '!')):
-        return text
-    return text + '.'
-
-
 def entry_year(entry):
     """Extract a sortable integer year from an entry, 0 if absent."""
     match = re.search(r'(\d{4})', entry.fields.get('year', ''))
     return int(match.group(1)) if match else 0
 
 
-def format_entry(entry):
-    """Render a single pybtex entry as an HTML citation string."""
-    fields = entry.fields
-    parts = []
-
-    authors = _format_authors(entry.persons.get('author', []))
-    if authors:
-        parts.append(authors + '.')
-
-    year = latex_to_text(fields.get('year', ''))
-    if year:
-        parts.append(year + '.')
-
-    # Title, hyperlinked to the URL if there is one, else the DOI.
-    title = _esc(latex_to_text(fields.get('title', '')))
+def _entry_url(fields):
+    """Preferred link target for an entry: explicit URL, else the DOI."""
     url = latex_to_text(fields.get('url', ''))
     if not url and fields.get('doi'):
         url = 'https://doi.org/' + latex_to_text(fields['doi'])
+    return url
+
+
+def _venue_label(entry):
+    """Short venue label. Falls back to the full booktitle/journal if the
+    entry has no `venue` field, so a new entry is never left blank."""
+    fields = entry.fields
+    venue = latex_to_text(fields.get('venue', ''))
+    if venue:
+        return venue
+    if entry.type == 'article':
+        return latex_to_text(fields.get('journal', '') or fields.get('journaltitle', ''))
+    return latex_to_text(fields.get('booktitle', ''))
+
+
+def format_entry(key, entry):
+    """Render one entry as a title / authors / venue block."""
+    fields = entry.fields
+    rows = []
+
+    title = _esc(latex_to_text(fields.get('title', '')))
+    award = latex_to_text(fields.get('award', ''))
+    url = _entry_url(fields)
     if url:
         title = f'<a href="{html.escape(url, quote=True)}">{title}</a>'
-    if title:
-        parts.append(_terminate(title))
+    if award:
+        title = f'<span class="pub-award" title="{_esc(award)}">&#127942;</span> {title}'
+    rows.append(f'<div class="pub-title">{title}</div>')
 
-    # Venue: journal for articles, "In <booktitle>" for everything else.
-    segment = []
-    if entry.type == 'article':
-        journal = latex_to_text(fields.get('journal', '') or fields.get('journaltitle', ''))
-        if journal:
-            segment.append(f'<em>{_esc(journal)}</em>')
-        volume = latex_to_text(fields.get('volume', ''))
-        number = latex_to_text(fields.get('number', ''))
-        if volume and number:
-            segment.append(f'{_esc(volume)}({_esc(number)})')
-        elif volume:
-            segment.append(_esc(volume))
-    else:
-        booktitle = latex_to_text(fields.get('booktitle', ''))
-        if booktitle:
-            segment.append(f'In <em>{_esc(booktitle)}</em>')
+    authors = _format_authors(entry.persons.get('author', []))
+    if authors:
+        rows.append(f'<div class="pub-authors">{authors}</div>')
 
-    pages = _format_pages(fields.get('pages', ''))
-    if pages:
-        segment.append(f'pages {_esc(pages)}')
-    address = latex_to_text(fields.get('address', ''))
-    if address:
-        segment.append(_esc(address))
-    if segment:
-        parts.append(', '.join(segment) + '.')
+    # Venue line: "VENUE (Award) · code"
+    meta = []
+    venue = _venue_label(entry)
+    if venue:
+        label = _esc(venue)
+        if award:
+            label += f' ({_esc(award)})'
+        meta.append(f'<span class="pub-venue">{label}</span>')
+    code = latex_to_text(fields.get('code', ''))
+    if code:
+        meta.append(f'<a href="{html.escape(code, quote=True)}">code</a>')
+    if meta:
+        rows.append('<div class="pub-meta">' + ' &middot; '.join(meta) + '</div>')
 
-    publisher = latex_to_text(fields.get('publisher', ''))
-    if publisher:
-        parts.append(_esc(publisher) + '.')
-
-    return ' '.join(parts)
+    anchor = html.escape(key, quote=True)
+    return f'<div class="pub" id="bib-{anchor}">' + ''.join(rows) + '</div>'
 
 
 def render_bibliography(bib_path):
-    """Parse a .bib file and render it as a flat reverse-chronological list."""
+    """Parse a .bib file and render it grouped under year headings."""
     parser = bibtex.Parser()
     bib_data = parser.parse_file(bib_path)
 
@@ -168,12 +159,16 @@ def render_bibliography(bib_path):
         key=lambda kv: (-entry_year(kv[1]), kv[0]),
     )
 
-    items = [
-        f'<li class="bibliography-entry" id="bib-{html.escape(key, quote=True)}">'
-        f'{format_entry(entry)}</li>'
-        for key, entry in ordered
-    ]
-    return '<div class="bibliography"><ul>' + ''.join(items) + '</ul></div>'
+    out = []
+    current_year = None
+    for key, entry in ordered:
+        year = entry_year(entry)
+        if year != current_year:
+            current_year = year
+            label = str(year) if year else 'Other'
+            out.append(f'<h2 class="pub-year">{label}</h2>')
+        out.append(format_entry(key, entry))
+    return '<div class="bibliography">' + ''.join(out) + '</div>'
 
 
 class BibliographyAsciiDocReader:
