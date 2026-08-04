@@ -4,6 +4,9 @@
 %   conf     -> CV 'Refereed Conference Papers'
 %   workshop -> CV 'Refereed Workshop Papers'
 %   abbr     -> included in the 2-page CV (2pge.tex) 'Select Publications'
+% venue = short label shown on the website (e.g. ACL, COLING). Site-only;
+% LaTeX ignores it. code = repo URL, award = award name; both optional and
+% rendered only when present.
 % Journal-article entries need no conf/workshop keyword; the CV selects them by
 % entry type instead. Avoid writing an "at"-sign in these comments: BibTeX
 % parsers treat it as the start of an entry even inside a % comment.
@@ -38,7 +41,8 @@
     doi = "10.18653/v1/2026.computel-1.15",
     pages = "136--147",
     ISBN = "979-8-89176-422-4",
-    keywords = {workshop,abbr}
+    keywords = {workshop,abbr},
+    venue = {ComputEL}
 }
 
 @inproceedings{gessler-haynes-2026-corsal,
@@ -59,7 +63,8 @@
     doi = "10.18653/v1/2026.computel-1.14",
     pages = "125--135",
     ISBN = "979-8-89176-422-4",
-    keywords = {workshop}
+    keywords = {workshop},
+    venue = {ComputEL}
 }
 
 @inproceedings{shi-etal-2026-culturally,
@@ -85,7 +90,8 @@
     doi = "10.18653/v1/2026.americasnlp-6.21",
     pages = "236--242",
     ISBN = "979-8-89176-415-6",
-    keywords = {workshop}
+    keywords = {workshop},
+    venue = {AmericasNLP}
 }
 
 @inproceedings{gessler-etal-2025-understanding,
@@ -107,7 +113,8 @@
     pages = "867--877",
     ISBN = "979-8-89176-256-5",
     abstract = "Despite over 20 years of NLP work explicitly intended for application in language documentation (LD), practical use of this work remains vanishingly scarce. This issue has been noted and discussed over the past 10 years, but without the benefit of data to inform the discourse.To address this lack in the literature, we present a survey- and interview-based analysis of the lack of adoption of NLP in LD, focusing on the matter of collaborations between documentary linguists and NLP researchers. Our data show support for ideas from previous work but also reveal the importance of little-discussed factors such as misaligned professional incentives, technical knowledge burdens, and LD software.",
-    keywords={conf,abbr}
+    keywords={conf,abbr},
+    venue = {ACL Findings}
 }
 
 @inproceedings{marashian-etal-2025-priest,
@@ -131,7 +138,8 @@
     url = "https://aclanthology.org/2025.coling-main.472/",
     pages = "7087--7098",
     abstract = "Many of the world`s languages have insufficient data to train high-performing general neural machine translation (NMT) models, let alone domain-specific models, and often the only available parallel data are small amounts of religious texts. Hence, domain adaptation (DA) is a crucial issue faced by contemporary NMT and has, so far, been underexplored for low-resource languages. In this paper, we evaluate a set of methods from both low-resource NMT and DA in a realistic setting, in which we aim to translate between a high-resource and a low-resource language with access to only: a) parallel Bible data, b) a bilingual dictionary, and c) a monolingual target-domain corpus in the high-resource language. Our results show that the effectiveness of the tested methods varies, with the simplest one, DALI, being most effective. We follow up with a small human evaluation of DALI, which shows that there is still a need for more careful investigation of how to accomplish DA for low-resource NMT.",
-    keywords = {conf,abbr}
+    keywords = {conf,abbr},
+    venue = {COLING}
 }
 
 @article{10.1162/coli_a_00538,
@@ -146,7 +154,8 @@
     doi = {10.1162/coli_a_00538},
     url = {https://doi.org/10.1162/coli\_a\_00538},
     eprint = {https://direct.mit.edu/coli/article-pdf/doi/10.1162/coli\_a\_00538/2479678/coli\_a\_00538.pdf},
-    keywords={abbr}
+    keywords={abbr},
+    venue = {Computational Linguistics}
 }
 
 @inproceedings{gessler-2024-pronto,
@@ -166,7 +175,8 @@
     url = "https://aclanthology.org/2024.lrec-main.1159",
     pages = "13243--13256",
     abstract = "Evaluation datasets are critical resources for measuring the quality of pretrained language models. However, due to the high cost of dataset annotation, these resources are scarce for most languages other than English, making it difficult to assess the quality of language models. In this work, we present a new method for evaluation dataset construction which enables any language with a New Testament translation to receive a suite of evaluation datasets suitable for pretrained language model evaluation. The method critically involves aligning verses with those in the New Testament portion of English OntoNotes, and then projecting annotations from English to the target language, with no manual annotation required. We apply this method to 1051 New Testament translations in 859 languages and make them publicly available. Additionally, we conduct experiments which demonstrate the efficacy of our method for creating evaluation tasks which can assess language model quality.",
-    keywords = {conf,abbr},
+    keywords = {conf,abbr},,
+    venue = {LREC-COLING}
 }
 
 @inproceedings{gessler-von-der-wense-2024-nlp,
@@ -189,7 +199,8 @@
     doi = "10.18653/v1/2024.americasnlp-1.1",
     pages = "1--6",
     abstract = "Both NLP researchers and linguists have expressed a desire to use language technologies in language documentation, but most documentary work still proceeds without them, presenting a lost opportunity to hasten the preservation of the world{'}s endangered languages, such as those spoken in Latin America. In this work, we empirically measure two factors that have previously been identified as explanations of this low utilization: curricular offerings in graduate programs, and rates of interdisciplinary collaboration in publications related to NLP in language documentation. Our findings verify the claim that interdisciplinary training and collaborations are scarce and support the view that interdisciplinary curricular offerings facilitate interdisciplinary collaborations.",
-    keywords = {workshop,abbr},
+    keywords = {workshop,abbr},,
+    venue = {AmericasNLP}
 }
 
 @inproceedings{rice-etal-2024-tams,
@@ -210,7 +221,8 @@
     url = "https://aclanthology.org/2024.acl-long.366",
     pages = "6752--6765",
     abstract = "Canonical morphological segmentation is the process of analyzing words into the standard (\textit{aka} underlying) forms of their constituent morphemes.This is a core task in endangered language documentation, and NLP systems have the potential to dramatically speed up this process. In typical language documentation settings, training data for canonical morpheme segmentation is scarce, making it difficult to train high quality models. However, translation data is often much more abundant, and, in this work, we present a method that attempts to leverage translation data in the canonical segmentation task. We propose a character-level sequence-to-sequence model that incorporates representations of translations obtained from pretrained high-resource monolingual language models as an additional signal. Our model outperforms the baseline in a super-low resource setting but yields mixed results on training splits with more data. Additionally, we find that we can achieve strong performance even without needing difficult-to-obtain word level alignments. While further work is needed to make translations useful in higher-resource settings, our model shows promise in severely resource-constrained settings.",
-    keywords = {conf,abbr},
+    keywords = {conf,abbr},,
+    venue = {ACL}
 }
 
 @inproceedings{aoyama-etal-2023-gentle,
@@ -235,7 +247,8 @@
     doi = "10.18653/v1/2023.law-1.17",
     pages = "166--178",
     abstract = "We present GENTLE, a new mixed-genre English challenge corpus totaling 17K tokens and consisting of 8 unusual text types for out-of-domain evaluation: dictionary entries, esports commentaries, legal documents, medical notes, poetry, mathematical proofs, syllabuses, and threat letters. GENTLE is manually annotated for a variety of popular NLP tasks, including syntactic dependency parsing, entity recognition, coreference resolution, and discourse parsing. We evaluate state-of-the-art NLP systems on GENTLE and find severe degradation for at least some genres in their performance on all tasks, which indicates GENTLE{'}s utility as an evaluation dataset for NLP systems.",
-    keywords = {workshop},
+    keywords = {workshop},,
+    venue = {LAW}
 }
 
 @inproceedings{gessler-schneider-2023-syntactic,
@@ -254,7 +267,8 @@
     doi = "10.18653/v1/2023.conll-1.17",
     pages = "238--253",
     abstract = "A line of work on Transformer-based language models such as BERT has attempted to use syntactic inductive bias to enhance the pretraining process, on the theory that building syntactic structure into the training process should reduce the amount of data needed for training. But such methods are often tested for high-resource languages such as English. In this work, we investigate whether these methods can compensate for data sparseness in low-resource languages, hypothesizing that they ought to be more effective for low-resource languages. We experiment with five low-resource languages: Uyghur, Wolof, Maltese, Coptic, and Ancient Greek. We find that these syntactic inductive bias methods produce uneven results in low-resource settings, and provide surprisingly little benefit in most cases.",
-    keywords = {conf,abbr},
+    keywords = {conf,abbr},,
+    venue = {CoNLL}
 }
 
 @inproceedings{gessler-2022-closing,
@@ -279,7 +293,8 @@
     doi = "10.18653/v1/2022.computel-1.15",
     pages = "119--126",
     abstract = "For decades, researchers in natural language processing and computational linguistics have been developing models and algorithms that aim to serve the needs of language documentation projects. However, these models have seen little use in language documentation despite their great potential for making documentary linguistic artefacts better and easier to produce. In this work, we argue that a major reason for this NLP gap is the lack of a strong foundation of application software which can on the one hand serve the complex needs of language documentation and on the other hand provide effortless integration with NLP models. We further present and describe a work-in-progress system we have developed to serve this need, Glam.",
-    keywords = {workshop,abbr},
+    keywords = {workshop,abbr},,
+    venue = {ComputEL}
 }
 
 @inproceedings{gessler-etal-2022-midas,
@@ -297,7 +312,8 @@
     url = "https://aclanthology.org/2022.law-1.13",
     pages = "103--110",
     abstract = "Large scale annotation of rich multilayer corpus data is expensive and time consuming, motivating approaches that integrate high quality automatic tools with active learning in order to prioritize human labeling of hard cases. A related challenge in such scenarios is the concurrent management of automatically annotated data and human annotated data, particularly where different subsets of the data have been corrected for different types of annotation and with different levels of confidence. In this paper we present [REDACTED], a collaborative, version-controlled online annotation environment for multilayer corpus data which includes integrated provenance and confidence metadata for each piece of information at the document, sentence, token and annotation level. We present a case study on improving annotation quality in an existing multilayer parse bank of English called AMALGUM, focusing on active learning in corpus preprocessing, at the surprisingly challenging level of sentence segmentation. Our results show improvements to state-of-the-art sentence segmentation and a promising workflow for getting {``}silver{''} data to approach gold standard quality.",
-    keywords = {workshop},
+    keywords = {workshop},,
+    venue = {LAW}
 }
 
 @inproceedings{gessler-etal-2022-xposition,
@@ -327,7 +343,8 @@
     url = "https://aclanthology.org/2022.lrec-1.194",
     pages = "1824--1830",
     abstract = "We present Xposition, an online platform for documenting adpositional semantics across languages in terms of supersenses (Schneider et al., 2018). More than just a lexical database, Xposition houses annotation guidelines, structured lexicographic documentation, and annotated corpora. Guidelines and documentation are stored as wiki pages for ease of editing, and described elements (supersenses, adpositions, etc.) are hyperlinked for ease of browsing. We describe how the platform structures information; its current contents across several languages; and aspects of the design of the web application that supports it, with special attention to how it supports datasets and standards that evolve over time.",
-    keywords = {conf},
+    keywords = {conf},,
+    venue = {LREC}
 }
 
 @inproceedings{gessler-zeldes-2022-microbert,
@@ -349,7 +366,8 @@
     doi = "10.18653/v1/2022.mrl-1.9",
     pages = "86--99",
     abstract = "BERT-style contextualized word embedding models are critical for good performance in most NLP tasks, but they are data-hungry and therefore difficult to train for low-resource languages. In this work, we investigate whether a combination of greatly reduced model size and two linguistically rich auxiliary pretraining tasks (part-of-speech tagging and dependency parsing) can help produce better BERTs in a low-resource setting. Results from 7 diverse languages indicate that our model, MicroBERT, is able to produce marked improvements in downstream task evaluations, including gains up to 18{\%} for parser LAS and 11{\%} for NER F1 compared to an mBERT baseline, and we achieve these results with less than 1{\%} of the parameter count of a multilingual BERT base{--}sized model. We conclude that training very small BERTs and leveraging any available labeled data for multitask learning during pretraining can produce models which outperform both their multilingual counterparts and traditional fixed embeddings for low-resource languages.",
-    keywords = {workshop,abbr},
+    keywords = {workshop,abbr},,
+    venue = {MRL}
 }
 
 @inproceedings{gessler-etal-2021-discodisco,
@@ -375,7 +393,8 @@
     doi = "10.18653/v1/2021.disrpt-1.6",
     pages = "51--62",
     abstract = "This paper describes our submission to the DISRPT2021 Shared Task on Discourse Unit Segmentation, Connective Detection, and Relation Classification. Our system, called DisCoDisCo, is a Transformer-based neural classifier which enhances contextualized word embeddings (CWEs) with hand-crafted features, relying on tokenwise sequence tagging for discourse segmentation and connective detection, and a feature-rich, encoder-less sentence pair classifier for relation classification. Our results for the first two tasks outperform SOTA scores from the previous 2019 shared task, and results on relation classification suggest strong performance on the new 2021 benchmark. Ablation tests show that including features beyond CWEs are helpful for both tasks, and a partial evaluation of multiple pretrained Transformer-based language models indicates that models pre-trained on the Next Sentence Prediction (NSP) task are optimal for relation classification.",
-    keywords = {workshop},
+    keywords = {workshop},,
+    venue = {DISRPT}
 }
 
 @inproceedings{gessler-schneider-2021-bert,
@@ -398,7 +417,8 @@
     doi = "10.18653/v1/2021.blackboxnlp-1.43",
     pages = "539--547",
     abstract = "An important question concerning contextualized word embedding (CWE) models like BERT is how well they can represent different word senses, especially those in the long tail of uncommon senses. Rather than build a WSD system as in previous work, we investigate contextualized embedding neighborhoods directly, formulating a query-by-example nearest neighbor retrieval task and examining ranking performance for words and senses in different frequency bands. In an evaluation on two English sense-annotated corpora, we find that several popular CWE models all outperform a random baseline even for proportionally rare senses, without explicit sense supervision. However, performance varies considerably even among models with similar architectures and pretraining regimes, with especially large differences for rare word senses, revealing that CWE models are not all created equal when it comes to approximating word senses in their native representations.",
-    keywords = {workshop},
+    keywords = {workshop},,
+    venue = {BlackboxNLP}
 }
 
 @inproceedings{arora-etal-2020-supervised,
@@ -419,7 +439,8 @@
     doi = "10.18653/v1/2020.acl-main.696",
     pages = "7791--7795",
     abstract = "Hindi grapheme-to-phoneme (G2P) conversion is mostly trivial, with one exception: whether a schwa represented in the orthography is pronounced or unpronounced (deleted). Previous work has attempted to predict schwa deletion in a rule-based fashion using prosodic or phonetic analysis. We present the first statistical schwa deletion classifier for Hindi, which relies solely on the orthography as the input and outperforms previous approaches. We trained our model on a newly-compiled pronunciation lexicon extracted from various online dictionaries. Our best Hindi model achieves state of the art performance, and also achieves good performance on a closely related language, Punjabi, without modification.",
-    keywords = {conf},
+    keywords = {conf},,
+    venue = {ACL}
 }
 
 @inproceedings{gessler-etal-2020-amalgum,
@@ -454,7 +475,8 @@
     abstract = "We present a freely available, genre-balanced English web corpus totaling 4M tokens and featuring a large number of high-quality automatic annotation layers, including dependency trees, non-named entity annotations, coreference resolution, and discourse trees in Rhetorical Structure Theory. By tapping open online data sources the corpus is meant to offer a more sizable alternative to smaller manually created annotated data sets, while avoiding pitfalls such as imbalanced or unknown composition, licensing problems, and low-quality natural language processing. We harness knowledge from multiple annotation layers in order to achieve a {``}better than NLP{''} benchmark and evaluate the accuracy of the resulting resource.",
     language = "English",
     ISBN = "979-10-95546-34-4",
-    keywords = {conf},
+    keywords = {conf},,
+    venue = {LREC}
 }
 
 @inproceedings{gessler-etal-2020-supersense,
@@ -472,7 +494,8 @@
     url = "https://aclanthology.org/2020.law-1.11",
     pages = "117--126",
     abstract = "Prepositional supersense annotation is time-consuming and requires expert training. Here, we present two sensible methods for obtaining prepositional supersense annotations indirectly by eliciting surface substitution and similarity judgments. Four pilot studies suggest that both methods have potential for producing prepositional supersense annotations that are comparable in quality to expert annotations.",
-    keywords = {workshop},
+    keywords = {workshop},,
+    venue = {LAW}
 }
 
 @inproceedings{neubig-etal-2020-summary,
@@ -515,7 +538,8 @@
     abstract = "Despite recent advances in natural language processing and other language technology, the application of such technology to language documentation and conservation has been limited. In August 2019, a workshop was held at Carnegie Mellon University in Pittsburgh, PA, USA to attempt to bring together language community members, documentary linguists, and technologists to discuss how to bridge this gap and create prototypes of novel and practical language revitalization technologies. The workshop focused on developing technologies to aid language documentation and revitalization in four areas: 1) spoken language (speech transcription, phone to orthography decoding, text-to-speech and text-speech forced alignment), 2) dictionary extraction and management, 3) search tools for corpora, and 4) social media (language learning bots and social media analysis). This paper reports the results of this workshop, including issues discussed, and various conceived and implemented technologies for nine languages: Arapaho, Cayuga, Inuktitut, Irish Gaelic, Kidaw{'}ida, Kwak{'}wala, Ojibwe, San Juan Quiahije Chatino, and Seneca.",
     language = "English",
     ISBN = "979-10-95546-35-1",
-    keywords = {workshop},
+    keywords = {workshop},,
+    venue = {SLTU-CCURL}
 }
 
 @inproceedings{abrams-etal-2019-b,
@@ -540,7 +564,8 @@
     doi = "10.18653/v1/W19-5948",
     pages = "418--421",
     abstract = "We present B. Rex, a dialogue agent for book recommendations. B. Rex aims to exploit the cognitive ease of natural dialogue and the excitement of a whimsical persona in order to engage users who might not enjoy using more common interfaces for finding new books. B. Rex succeeds in making book recommendations with good quality based on only information revealed by the user in the dialogue.",
-    keywords = {conf},
+    keywords = {conf},,
+    venue = {SIGdial}
 }
 
 @inproceedings{gessler-2019-developing,
@@ -560,7 +585,8 @@
     publisher = "Association for Computational Linguistics",
     url = "https://aclanthology.org/W19-6002",
     pages = "6--13",
-    keywords = {workshop,abbr},
+    keywords = {workshop,abbr},,
+    venue = {ComputEL}
 }
 
 @inproceedings{gessler-etal-2019-discourse,
@@ -582,5 +608,6 @@
     doi = "10.18653/v1/W19-2708",
     pages = "56--61",
     abstract = "This paper presents a new system for open-ended discourse relation signal annotation in the framework of Rhetorical Structure Theory (RST), implemented on top of an online tool for RST annotation. We discuss existing projects annotating textual signals of discourse relations, which have so far not allowed simultaneously structuring and annotating words signaling hierarchical discourse trees, and demonstrate the design and applications of our interface by extending existing RST annotations in the freely available GUM corpus.",
-    keywords = {workshop},
+    keywords = {workshop},,
+    venue = {DISRPT}
 }
