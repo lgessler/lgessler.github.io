@@ -20,6 +20,9 @@ I am interested in low-resource NLP and language resource development, particula
   <a class="cta-card" href="teaching.html">
     <span class="cta-title">Teaching</span>
   </a>
+  <a class="cta-card" href="cv.pdf">
+    <span class="cta-title">CV <span class="cta-ext" aria-hidden="true">(PDF)</span></span>
+  </a>
   <a class="cta-card" href="contact.html">
     <span class="cta-title">Contact</span>
   </a>

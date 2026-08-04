@@ -109,8 +109,10 @@ a:hover, a:focus {
   text-decoration: none;
 }
 
-/* The lab gets an accent so it reads as the primary destination. */
+/* The lab gets an accent and the full row so it reads as the primary
+   destination, leaving the remaining four cards as a tidy 2x2. */
 .cta-card.cta-featured {
+  grid-column: 1 / -1;
   border-color: #bcd6ea;
   background-color: #f5f9fc;
 }
