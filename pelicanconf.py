@@ -47,6 +47,7 @@ MENUITEMS = (
     ('LARC Lab', 'https://larc-iu.github.io/'),
     ('Research', '/research.html'),
     ('Teaching', '/teaching.html'),
+    ('CV', '/cv.pdf'),
     ('Contact', '/contact.html'),
 )
 
