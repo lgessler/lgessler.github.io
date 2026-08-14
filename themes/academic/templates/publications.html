@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }}{% endblock %}
+
+{% block description %}{{ page.summary|striptags }}{% endblock %}
+
+{# Markup matches what the old bibliography plugin emitted, so the existing
+   .bibliography / .pub-* styles apply unchanged. #}
+{% macro author_list(authors) -%}
+    {%- for author in authors -%}
+        {%- if not loop.first -%}
+            {%- if loop.last -%}
+                {%- if loop.length > 2 %},{% endif %} and
+            {%- else -%}
+                ,
+            {%- endif %}
+        {%- endif %} {% if author.highlight %}<strong>{{ author.full }}</strong>{% else %}{{ author.full }}{% endif %}
+    {%- endfor -%}
+{%- endmacro %}
+
+{% block content %}
+    <article class="page">
+        <div class="content">
+            {{ page.content }}
+        </div>
+
+        <div class="bibliography">
+            {% for group in publications.by_year %}
+            <h2 class="pub-year">{{ group.year|default('Other', true) }}</h2>
+            {% for pub in group.entries %}
+            <div class="pub" id="bib-{{ pub.key }}">
+                <div class="pub-title">
+                    {%- if pub.award %}<span class="pub-award" title="{{ pub.award }}">&#127942;</span> {% endif -%}
+                    {%- if pub.url %}<a href="{{ pub.url }}">{{ pub.title }}</a>{% else %}{{ pub.title }}{% endif -%}
+                </div>
+                {%- if pub.authors %}
+                <div class="pub-authors">{{ author_list(pub.authors)|trim }}</div>
+                {%- endif %}
+                {%- set meta = [] %}
+                {%- if pub.venue %}{% set _ = meta.append('venue') %}{% endif %}
+                {%- for link in pub.links %}{% set _ = meta.append(link) %}{% endfor %}
+                {%- if meta %}
+                <div class="pub-meta">
+                    {%- for item in meta -%}
+                        {%- if not loop.first %} &middot; {% endif -%}
+                        {%- if item == 'venue' -%}
+                            <span class="pub-venue">{{ pub.venue }}{% if pub.award %} ({{ pub.award }}){% endif %}</span>
+                        {%- else -%}
+                            <a href="{{ item.url }}">{{ item.label|lower }}</a>
+                        {%- endif -%}
+                    {%- endfor -%}
+                </div>
+                {%- endif %}
+            </div>
+            {% endfor %}
+            {% endfor %}
+        </div>
+    </article>
+{% endblock %}

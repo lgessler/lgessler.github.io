@@ -5,6 +5,7 @@ livereload>=2.6.3
 ghp-import>=2.1.0
 markdown>=3.4.1
 typogrify>=2.0.7
+# Provides the asciidoc CLI that larc_site_utils.asciidoc_reader shells out to.
 asciidoc>=10.0.0
-pybtex>=0.24.0
-pylatexenc>=2.10
+# pybtex arrives as a dependency of larc-site-utils.
+larc-site-utils @ git+https://github.com/larc-iu/larc-site-utils@master

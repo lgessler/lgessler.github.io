@@ -29,12 +29,23 @@ STATIC_PATHS = ['static']
 STATIC_SAVE_AS = '{path}'
 STATIC_URL = '{path}'
 
-# Extension support
-PLUGIN_PATHS = ['plugins']
-PLUGINS = ['asciidoc_reader', 'plugins.bibliography_plugin']
-READERS = {'asc': 'asciidoc_reader.AsciiDocReader'}
+# Shared plugins, installed from github.com/larc-iu/larc-site-utils and used by
+# the CL and LARC group sites too. The AsciiDoc reader is the same vendored
+# pelican-plugins one that used to sit in plugins/. publications replaces the
+# local bibliography plugin: same .bib, same conventions (short `venue`, `award`
+# and `code` fields), but it hands the parsed entries to
+# themes/academic/templates/publications.html instead of rendering HTML itself.
+PLUGINS = ['larc_site_utils.asciidoc_reader', 'larc_site_utils.publications']
 ASCIIDOC_OPTIONS = []
 ASCIIDOC_BACKEND = 'html5'
+
+# Publications
+PUBLICATIONS_BIB = 'static/publications.bib'
+HIGHLIGHT_AUTHORS = ['Luke Gessler']
+PUBLICATIONS_LINK_FIELDS = [('code', 'code')]
+# The venue line stays a venue line: most entries have a DOI, and offering it
+# as a second link next to every one of them is noise.
+PUBLICATIONS_DOI_LINK = False
 
 # Turn off default templates (including index)
 DIRECT_TEMPLATES = []

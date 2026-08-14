@@ -1,4 +1,3 @@
 = Publications
 :summary: Luke Gessler | Publications
-
-bibliography::publications.bib[]
+:template: publications
